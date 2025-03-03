@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猫ごはん工房 - 手作り猫用品の学習ノート</title>
+    <style>
+        :root {
+            --primary-color: #6a4c93;
+            --secondary-color: #f8ad9d;
+            --accent-color: #f08080;
+            --bg-color: #fcf6f5;
+            --text-color: #333333;
+            --section-padding: 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #f5f5f5;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            padding: 10px 15px;
+        }
+        
+        .nav-item {
+            padding: 8px 12px;
+            margin-right: 10px;
+            background-color: white;
+            border-radius: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .nav-icon {
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .container {
+            padding: 15px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(to bottom, rgba(106, 76, 147, 0.1), rgba(255, 255, 255, 0));
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #e76c6c;
+            transform: translateY(-2px);
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: var(--section-padding);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: var(--text-color);
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .svg-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .accordion {
+            margin-bottom: 15px;
+        }
+        
+        .accordion-header {
+            background-color: #f5f5f5;
+            padding: 12px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .accordion-content {
+            display: none;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .accordion-content.show {
+            display: block;
+        }
+        
+        .tab-container {
+            margin: 20px 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #f5f5f5;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        .tab-button.active {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 5px;
+        }
+        
+        .tab-content.show {
+            display: block;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .info-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .info-content {
+            font-size: 0.95rem;
+        }
+        
+        .step-container {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .ingredient-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .ingredient {
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .memo-box {
+            background-color: #fff9e6;
+            border: 1px solid #ffe0b2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .memo-box::before {
+            content: "学習メモ";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: #fff9e6;
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: #ff9800;
+        }
+        
+        .point-box {
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .point-box::before {
+            content: "重要ポイント";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: #e3f2fd;
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: #2196f3;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 0.9rem;
+            color: #666;
+            background-color: #f5f5f5;
+            margin-top: 30px;
+        }
+        
+        /* アニメーション効果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">猫ごはん工房</div>
+        <div class="tagline">〜手作り猫用品の学習ノート〜</div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-item active"><span class="nav-icon">🏠</span>ホーム</a>
+            <a href="#cat-food" class="nav-item"><span class="nav-icon">🍽️</span>猫の餌</a>
+            <a href="#cat-litter" class="nav-item"><span class="nav-icon">🧹</span>猫砂</a>
+            <a href="#product-dev" class="nav-item"><span class="nav-icon">🔬</span>商品開発</a>
+            <a href="#knowledge" class="nav-item"><span class="nav-icon">📚</span>知識集</a>
+            <a href="#notes" class="nav-item"><span class="nav-icon">📝</span>学習メモ</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="home" class="hero">
+            <h1>愛猫の健康を第一に考えた<br>手作り猫用品の学習ノート</h1>
+            <p>化学添加物を使用しない安心・安全な猫の餌と猫砂の作り方をまとめたサイトです。<br>
+            自分の学習と知識向上のためのノートとして作成しました。</p>
+            <a href="#cat-food" class="cta-button">レシピを見る</a>
+        </section>
+        
+        <section id="cat-food">
+            <h2>🍽️ 猫の手作り餌</h2>
+            
+            <p>市販のキャットフードには、猫の健康に悪影響を及ぼす可能性のある保存料や着色料などの添加物が含まれていることが少なくありません。手作りの猫の餌なら、使用する材料を完全にコントロールでき、愛猫の健康を守ることができます。</p>
+            
+            <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- 市販餌と手作り餌の比較図 -->
+                <rect x="50" y="50" width="180" height="200" fill="#ffcccc" rx="10" ry="10"/>
+                <rect x="270" y="50" width="180" height="200" fill="#ccffcc" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="140" y="30" font-size="16" text-anchor="middle" font-weight="bold">市販餌</text>
+                <text x="360" y="30" font-size="16" text-anchor="middle" font-weight="bold">手作り餌</text>
+                
+                <!-- 市販餌の内容 -->
+                <circle cx="80" cy="90" r="15" fill="#ff9999"/>
+                <text x="110" y="95" font-size="14">添加物</text>
+                
+                <circle cx="80" cy="130" r="15" fill="#ff9999"/>
+                <text x="110" y="135" font-size="14">保存料</text>
+                
+                <circle cx="80" cy="170" r="15" fill="#ff9999"/>
+                <text x="110" y="175" font-size="14">着色料</text>
+                
+                <circle cx="80" cy="210" r="15" fill="#ffcc99"/>
+                <text x="110" y="215" font-size="14">穀物フィラー</text>
+                
+                <!-- 手作り餌の内容 -->
+                <circle cx="300" cy="90" r="15" fill="#99cc99"/>
+                <text x="330" y="95" font-size="14">新鮮な肉</text>
+                
+                <circle cx="300" cy="130" r="15" fill="#99cc99"/>
+                <text x="330" y="135" font-size="14">野菜・栄養素</text>
+                
+                <circle cx="300" cy="170" r="15" fill="#99cc99"/>
+                <text x="330" y="175" font-size="14">タウリン補給</text>
+                
+                <circle cx="300" cy="210" r="15" fill="#99cc99"/>
+                <text x="330" y="215" font-size="14">カスタマイズ</text>
+                
+                <!-- 矢印 -->
+                <path d="M 240 150 L 260 150" stroke="#666" stroke-width="2"/>
+                <path d="M 260 150 L 250 145 L 250 155 Z" fill="#666"/>
+            </svg>
+            
+            <h3>手作り猫の餌のメリット</h3>
+            <ul>
+                <li>添加物や保存料を使用しない安全性</li>
+                <li>猫の好みや健康状態に合わせたカスタマイズが可能</li>
+                <li>新鮮な材料による栄養価の高さ</li>
+                <li>長期的に見た場合のコスト削減</li>
+                <li>愛猫とのより深い絆づくり</li>
+            </ul>
+            
+            <div class="point-box">
+                <p>手作り猫餌を作る際に最も重要なのは、<strong>栄養バランス</strong>です。猫は肉食動物なので、タンパク質が豊富で、タウリンなどの必須栄養素が含まれた食事が必要です。野菜や穀物はごく少量に留め、肉や魚をメインにしましょう。</p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="openTab(event, 'recipe1')">生肉ベースレシピ</button>
+                    <button class="tab-button" onclick="openTab(event, 'recipe2')">魚ベースレシピ</button>
+                    <button class="tab-button" onclick="openTab(event, 'recipe3')">ドライフードレシピ</button>
+                </div>
+                
+                <div id="recipe1" class="tab-content show">
+                    <h3>生肉ベースの手作り猫餌レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">鶏むね肉 200g</span>
+                        <span class="ingredient">レバー 50g</span>
+                        <span class="ingredient">鶏卵 1個</span>
+                        <span class="ingredient">かぼちゃ 50g</span>
+                        <span class="ingredient">ブロッコリー 30g</span>
+                        <span class="ingredient">タウリン 250mg</span>
+                        <span class="ingredient">魚油 小さじ1</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">生肉ベースレシピの調理プロセス</text>
+                        
+                        <!-- プロセスの図 -->
+                        <circle cx="100" cy="80" r="30" fill="#ffcccc"/>
+                        <text x="100" y="85" font-size="14" text-anchor="middle">下準備</text>
+                        
+                        <circle cx="250" cy="80" r="30" fill="#ffcccc"/>
+                        <text x="250" y="85" font-size="14" text-anchor="middle">肉の処理</text>
+                        
+                        <circle cx="400" cy="80" r="30" fill="#ffcccc"/>
+                        <text x="400" y="85" font-size="14" text-anchor="middle">混合</text>
+                        
+                        <circle cx="250" cy="180" r="30" fill="#ffcccc"/>
+                        <text x="250" y="185" font-size="14" text-anchor="middle">保存</text>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 130 80 L 220 80" stroke="#666" stroke-width="2"/>
+                        <path d="M 220 80 L 210 75 L 210 85 Z" fill="#666"/>
+                        
+                        <path d="M 280 80 L 370 80" stroke="#666" stroke-width="2"/>
+                        <path d="M 370 80 L 360 75 L 360 85 Z" fill="#666"/>
+                        
+                        <path d="M 400 110 L 400 150 L 280 150 L 280 180" stroke="#666" stroke-width="2"/>
+                        <path d="M 280 180 L 275 170 L 285 170 Z" fill="#666"/>
+                        
+                        <!-- 詳細説明 -->
+                        <text x="100" y="240" font-size="12">・肉と野菜を小さく切る</text>
+                        <text x="100" y="260" font-size="12">・野菜は軽く茹でる</text>
+                        
+                        <text x="250" y="240" font-size="12">・65℃で10分加熱</text>
+                        <text x="250" y="260" font-size="12">・完全に火を通さない</text>
+                        
+                        <text x="400" y="240" font-size="12">・すべて混ぜる</text>
+                        <text x="400" y="260" font-size="12">・タウリン・魚油追加</text>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">下準備</span>
+                        <p>鶏肉とレバーは新鮮なものを選び、小さめに切ります。野菜は軽く茹でて冷まします。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">肉の処理</span>
+                        <p>鶏肉は65℃で10分間加熱し、表面の細菌を殺菌します。完全に火を通しすぎないようにします。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">材料を混ぜる</span>
+                        <p>すべての材料をフードプロセッサーに入れ、均一になるまで攪拌します。タウリンと魚油を加えます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">保存</span>
+                        <p>小分けにして冷凍保存します。使用前に自然解凍か電子レンジで軽く温めます。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>私の猫はこのレシピを特に気に入っています。タウリンは猫の健康に不可欠な栄養素なので忘れずに追加すること。タウリンはペットショップやオンラインで購入できます。最初は少量から始めて、猫の反応を見ながら調整するのが良いです。</p>
+                    </div>
+                </div>
+                
+                <div id="recipe2" class="tab-content">
+                    <h3>魚ベースの手作り猫餌レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">鮭 100g</span>
+                        <span class="ingredient">白身魚 100g</span>
+                        <span class="ingredient">かつお節 小さじ2</span>
+                        <span class="ingredient">人参 30g</span>
+                        <span class="ingredient">ほうれん草 20g</span>
+                        <span class="ingredient">タウリン 250mg</span>
+                        <span class="ingredient">ココナッツオイル 小さじ1/2</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">魚ベースレシピの準備プロセス</text>
+                        
+                        <!-- 図 -->
+                        <rect x="50" y="60" width="180" height="80" fill="#d1e0ff" rx="10" ry="10"/>
+                        <text x="140" y="100" font-size="14" text-anchor="middle" font-weight="bold">魚の下処理</text>
+                        <text x="140" y="120" font-size="12" text-anchor="middle">骨を完全に取り除く</text>
+                        
+                        <rect x="270" y="60" width="180" height="80" fill="#d1e0ff" rx="10" ry="10"/>
+                        <text x="360" y="100" font-size="14" text-anchor="middle" font-weight="bold">魚の調理</text>
+                        <text x="360" y="120" font-size="12" text-anchor="middle">蒸すか少量の水で茹でる</text>
+                        
+                        <rect x="50" y="180" width="180" height="80" fill="#d1e0ff" rx="10" ry="10"/>
+                        <text x="140" y="220" font-size="14" text-anchor="middle" font-weight="bold">野菜の準備</text>
+                        <text x="140" y="240" font-size="12" text-anchor="middle">柔らかく茹でて刻む</text>
+                        
+                        <rect x="270" y="180" width="180" height="80" fill="#d1e0ff" rx="10" ry="10"/>
+                        <text x="360" y="220" font-size="14" text-anchor="middle" font-weight="bold">材料を混ぜる</text>
+                        <text x="360" y="240" font-size="12" text-anchor="middle">タウリン・オイルを追加</text>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 230 100 L 270 100" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 100 L 260 95 L 260 105 Z" fill="#666"/>
+                        
+                        <path d="M 140 140 L 140 180" stroke="#666" stroke-width="2"/>
+                        <path d="M 140 180 L 135 170 L 145 170 Z" fill="#666"/>
+                        
+                        <path d="M 360 140 L 360 160 L 230 160 L 230 220 L 270 220" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 220 L 260 215 L 260 225 Z" fill="#666"/>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">魚の下処理</span>
+                        <p>鮭と白身魚は骨を丁寧に取り除き、小さめに切ります。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">魚の調理</span>
+                        <p>魚は蒸すか、少量の水で茹でて加熱します。油を使わないようにします。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">野菜の準備</span>
+                        <p>人参とほうれん草は柔らかくなるまで茹でて、細かく刻みます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">材料を混ぜる</span>
+                        <p>すべての材料を混ぜ合わせ、タウリンとココナッツオイルを加えます。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>魚の骨は猫にとって危険なので、完全に取り除くことが重要です。魚はオメガ3脂肪酸が豊富で猫の皮膚や毛並みに良い影響があります。ただし、生の魚には寄生虫のリスクがあるため、必ず加熱処理しましょう。</p>
+                    </div>
+                </div>
+                
+                <div id="recipe3" class="tab-content">
+                    <h3>ドライフードタイプの手作り猫餌レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">鶏ひき肉 150g</span>
+                        <span class="ingredient">オートミール 100g</span>
+                        <span class="ingredient">かぼちゃピューレ 50g</span>
+                        <span class="ingredient">鶏卵 1個</span>
+                        <span class="ingredient">タウリン 250mg</span>
+                        <span class="ingredient">オリーブオイル 小さじ1</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">ドライフードタイプの調理プロセス</text>
+                        
+                        <!-- 図: フローチャート形式 -->
+                        <rect x="150" y="50" width="200" height="40" fill="#ffe0cc" rx="5" ry="5"/>
+                        <text x="250" y="75" font-size="14" text-anchor="middle">1. オートミールを粉末にする</text>
+                        
+                        <rect x="150" y="110" width="200" height="40" fill="#ffe0cc" rx="5" ry="5"/>
+                        <text x="250" y="135" font-size="14" text-anchor="middle">2. すべての材料を混ぜる</text>
+                        
+                        <rect x="150" y="170" width="200" height="40" fill="#ffe0cc" rx="5" ry="5"/>
+                        <text x="250" y="195" font-size="14" text-anchor="middle">3. 小さな形に成形する</text>
+                        
+                        <rect x="150" y="230" width="200" height="40" fill="#ffe0cc" rx="5" ry="5"/>
+                        <text x="250" y="255" font-size="14" text-anchor="middle">4. 150℃のオーブンで30分焼く</text>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 250 90 L 250 110" stroke="#666" stroke-width="2"/>
+                        <path d="M 250 110 L 245 100 L 255 100 Z" fill="#666"/>
+                        
+                        <path d="M 250 150 L 250 170" stroke="#666" stroke-width="2"/>
+                        <path d="M 250 170 L 245 160 L 255 160 Z" fill="#666"/>
+                        
+                        <path d="M 250 210 L 250 230" stroke="#666" stroke-width="2"/>
+                        <path d="M 250 230 L 245 220 L 255 220 Z" fill="#666"/>
+                        
+                        <!-- 説明テキスト -->
+                        <text x="380" y="75" font-size="12">ミキサーで粉末状に</text>
+                        <text x="380" y="135" font-size="12">均一になるように混ぜる</text>
+                        <text x="380" y="195" font-size="12">オーブンシートに並べる</text>
+                        <text x="380" y="255" font-size="12">カリカリになるまで</text>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">下準備</span>
+                        <p>オートミールをミキサーで粉末状にします。かぼちゃは蒸してピューレ状にします。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">材料を混ぜる</span>
+                        <p>すべての材料をボウルに入れ、均一になるように混ぜ合わせます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">成形</span>
+                        <p>小さな平たい形に成形し、オーブン用のシートの上に並べます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">乾燥させる</span>
+                        <p>150℃のオーブンで30分程度、カリカリになるまで焼きます。冷めたら保存容器に入れます。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>このレシピは保存が効くため、旅行時や緊急時のバックアップとして便利です。ただし、水分が少ないので、猫に与える際は必ず新鮮な水も用意しましょう。オートミールは少量なら猫も消化できますが、過剰に使用しないよう注意が必要です。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>手作り猫餌の注意点</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>手作り猫餌を作る際には、以下の点に注意しましょう：</p>
+                    <ul>
+                        <li><strong>栄養バランス：</strong>猫は肉食動物なので、タンパク質が豊富な食事が必要です。タウリンなどの必須栄養素が不足しないようにしましょう。</li>
+                        <li><strong>生肉の扱い：</strong>生肉を使用する場合は、新鮮なものを選び、適切に加熱して細菌を殺菌しましょう。</li>
+                        <li><strong>禁止食材：</strong>玉ねぎ、ニンニク、チョコレート、ブドウ、レーズンなどは猫に有毒なので絶対に使用しないでください。</li>
+                        <li><strong>徐々に切り替える：</strong>新しい食事に切り替える際は、既存の食事と混ぜながら徐々に量を増やしていきましょう。</li>
+                        <li><strong>獣医師に相談：</strong>特に持病のある猫の場合は、手作り食に切り替える前に獣医師に相談することをお勧めします。</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>猫の栄養素チェックリスト</h3>
+            
+            <div class="info-card">
+                <div class="info-title">タンパク質</div>
+                <div class="info-content">
+                    猫は肉食動物のため、高タンパク質の食事が必須。主食には鶏肉、牛肉、魚などの動物性タンパク質を選びましょう。植物性タンパク質は猫の消化に適していません。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">タウリン</div>
+                <div class="info-content">
+                    猫は体内でタウリンを合成できないため、食事から摂取する必要があります。タウリン不足は心臓病や目の疾患の原因に。サプリメントでの補給が安全です。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">脂肪酸</div>
+                <div class="info-content">
+                    オメガ3とオメガ6脂肪酸は猫の皮膚と被毛の健康に重要。魚油やココナッツオイルを少量添加すると良いでしょう。
+                </div>
+            </div>
+        </section>
+        
+        <section id="cat-litter">
+            <h2>🧹 猫砂の手作り方法</h2>
+            
+            <p>市販の猫砂には、香料や防腐剤などの化学物質が含まれていることがあります。手作りの猫砂なら、無添加で安全、さらにゴミも減らせる環境にやさしい選択肢です。</p>
+            
+            <svg class="svg-container" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="320" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">手作り猫砂の種類と特徴</text>
+                
+                <!-- 表の枠 -->
+                <rect x="50" y="50" width="400" height="250" fill="none" stroke="#ccc" stroke-width="1"/>
+                
+                <!-- ヘッダー行 -->
+                <rect x="50" y="50" width="400" height="40" fill="#eee"/>
+                <line x1="150" y1="50" x2="150" y2="300" stroke="#ccc" stroke-width="1"/>
+                <line x1="300" y1="50" x2="300" y2="300" stroke="#ccc" stroke-width="1"/>
+                
+                <!-- ヘッダーテキスト -->
+                <text x="100" y="75" font-size="14" text-anchor="middle" font-weight="bold">種類</text>
+                <text x="225" y="75" font-size="14" text-anchor="middle" font-weight="bold">特徴</text>
+                <text x="350" y="75" font-size="14" text-anchor="middle" font-weight="bold">メリット</text>
+                
+                <!-- 1行目 -->
+                <rect x="50" y="90" width="400" height="70" fill="#f5f5f5"/>
+                <text x="100" y="110" font-size="14" text-anchor="middle" font-weight="bold">おがくず</text>
+                <text x="225" y="110" font-size="12" text-anchor="middle">木材の削りくずを</text>
+                <text x="225" y="130" font-size="12" text-anchor="middle">ベースとした</text>
+                <text x="225" y="150" font-size="12" text-anchor="middle">環境に優しい猫砂</text>
+                <text x="350" y="110" font-size="12" text-anchor="middle">・吸収力が高い</text>
+                <text x="350" y="130" font-size="12" text-anchor="middle">・生分解性</text>
+                <text x="350" y="150" font-size="12" text-anchor="middle">・入手しやすい</text>
+                
+                <!-- 2行目 -->
+                <rect x="50" y="160" width="400" height="70" fill="white"/>
+                <text x="100" y="180" font-size="14" text-anchor="middle" font-weight="bold">新聞紙</text>
+                <text x="225" y="180" font-size="12" text-anchor="middle">古新聞を細かく裂き</text>
+                <text x="225" y="200" font-size="12" text-anchor="middle">水に浸して乾燥させた</text>
+                <text x="225" y="220" font-size="12" text-anchor="middle">リサイクル猫砂</text>
+                <text x="350" y="180" font-size="12" text-anchor="middle">・コスト削減</text>
+                <text x="350" y="200" font-size="12" text-anchor="middle">・廃棄物削減</text>
+                <text x="350" y="220" font-size="12" text-anchor="middle">・自宅で簡単に作れる</text>
+                
+                <!-- 3行目 -->
+                <rect x="50" y="230" width="400" height="70" fill="#f5f5f5"/>
+                <text x="100" y="250" font-size="14" text-anchor="middle" font-weight="bold">重曹混合</text>
+                <text x="225" y="250" font-size="12" text-anchor="middle">小麦粉や重曹などを</text>
+                <text x="225" y="270" font-size="12" text-anchor="middle">混ぜて作る</text>
+                <text x="225" y="290" font-size="12" text-anchor="middle">消臭効果の高い猫砂</text>
+                <text x="350" y="250" font-size="12" text-anchor="middle">・高い消臭効果</text>
+                <text x="350" y="270" font-size="12" text-anchor="middle">・固まりやすい</text>
+                <text x="350" y="290" font-size="12" text-anchor="middle">・安全な成分</text>
+            </svg>
+            
+            <h3>手作り猫砂のメリット</h3>
+            <ul>
+                <li>化学物質や人工香料を使用しない安全性</li>
+                <li>生分解性があり環境に優しい</li>
+                <li>長期的に見たコスト削減</li>
+                <li>廃棄物の削減</li>
+                <li>猫の好みに合わせたカスタマイズが可能</li>
+            </ul>
+            
+            <div class="point-box">
+                <p>猫砂を手作りする際の重要なポイントは<strong>吸収力</strong>と<strong>消臭効果</strong>のバランスです。おがくずは吸収力に優れていますが、消臭効果を高めるために重曹などを追加するとより効果的です。また、猫が砂に慣れるまで時間がかかることがあるので、徐々に切り替えましょう。</p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="openTab(event, 'litter1')">おがくず猫砂</button>
+                    <button class="tab-button" onclick="openTab(event, 'litter2')">新聞紙猫砂</button>
+                    <button class="tab-button" onclick="openTab(event, 'litter3')">重曹混合猫砂</button>
+                </div>
+                
+                <div id="litter1" class="tab-content show">
+                    <h3>おがくずベースの猫砂レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">おがくず 4カップ</span>
+                        <span class="ingredient">ベーキングソーダ 1/2カップ</span>
+                        <span class="ingredient">重曹 1/4カップ</span>
+                        <span class="ingredient">木酢液 大さじ1（オプション）</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="280" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">おがくず猫砂の作り方</text>
+                        
+                        <!-- おがくず準備 -->
+                        <rect x="50" y="60" width="180" height="80" fill="#f0e6d2" rx="8" ry="8"/>
+                        <text x="140" y="90" font-size="14" text-anchor="middle" font-weight="bold">おがくずの準備</text>
+                        <text x="140" y="115" font-size="12" text-anchor="middle">無添加のおがくずを用意</text>
+                        
+                        <!-- 消臭材追加 -->
+                        <rect x="270" y="60" width="180" height="80" fill="#f0e6d2" rx="8" ry="8"/>
+                        <text x="360" y="90" font-size="14" text-anchor="middle" font-weight="bold">消臭材の追加</text>
+                        <text x="360" y="115" font-size="12" text-anchor="middle">ベーキングソーダと重曹を混ぜる</text>
+                        
+                        <!-- 混合 -->
+                        <rect x="50" y="170" width="180" height="80" fill="#f0e6d2" rx="8" ry="8"/>
+                        <text x="140" y="200" font-size="14" text-anchor="middle" font-weight="bold">混合</text>
+                        <text x="140" y="225" font-size="12" text-anchor="middle">全ての材料を均一に混ぜる</text>
+                        
+                        <!-- トイレに敷く -->
+                        <rect x="270" y="170" width="180" height="80" fill="#f0e6d2" rx="8" ry="8"/>
+                        <text x="360" y="200" font-size="14" text-anchor="middle" font-weight="bold">トイレに敷く</text>
+                        <text x="360" y="225" font-size="12" text-anchor="middle">5〜7cmの厚さに敷き詰める</text>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 230 100 L 270 100" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 100 L 260 95 L 260 105 Z" fill="#666"/>
+                        
+                        <path d="M 360 140 L 360 155 L 140 155 L 140 170" stroke="#666" stroke-width="2"/>
+                        <path d="M 140 170 L 135 160 L 145 160 Z" fill="#666"/>
+                        
+                        <path d="M 230 210 L 270 210" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 210 L 260 205 L 260 215 Z" fill="#666"/>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">おがくずの準備</span>
+                        <p>無添加・無着色のおがくずを用意します。ホームセンターやペットショップで入手可能です。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">消臭材の追加</span>
+                        <p>おがくずにベーキングソーダと重曹を混ぜて、消臭効果を高めます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">混合</span>
+                        <p>全ての材料を大きなボウルや袋に入れて、均一になるようによく混ぜます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">トイレに敷く</span>
+                        <p>猫トイレに5〜7cmの厚さに敷き詰めます。汚れた部分は毎日取り除きましょう。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>おがくず猫砂は吸収力が高く、自然な香りがするのでほとんどの猫が受け入れやすいです。ただし、猫の毛に付きやすい欠点があります。木酢液を少量加えると抗菌効果が高まりますが、強い匂いが苦手な猫もいるので様子を見ながら調整しましょう。</p>
+                    </div>
+                </div>
+                
+                <div id="litter2" class="tab-content">
+                    <h3>新聞紙ベースの猫砂レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">新聞紙 1kg分</span>
+                        <span class="ingredient">重曹 1/2カップ</span>
+                        <span class="ingredient">水 必要量</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">新聞紙猫砂の作り方</text>
+                        
+                        <!-- 4つのステップを表示 -->
+                        <!-- ステップ1 -->
+                        <rect x="50" y="60" width="180" height="100" rx="10" ry="10" fill="#e6e6e6"/>
+                        <text x="140" y="80" font-size="14" text-anchor="middle" font-weight="bold">ステップ1: 新聞紙の準備</text>
+                        <circle cx="140" cy="120" r="30" fill="#cccccc"/>
+                        <path d="M 130 110 L 140 105 L 150 110 L 150 125 L 140 130 L 130 125 Z" fill="#ffffff" stroke="#999999"/>
+                        
+                        <!-- ステップ2 -->
+                        <rect x="270" y="60" width="180" height="100" rx="10" ry="10" fill="#e6e6e6"/>
+                        <text x="360" y="80" font-size="14" text-anchor="middle" font-weight="bold">ステップ2: 水に浸す</text>
+                        <circle cx="360" cy="120" r="30" fill="#cccccc"/>
+                        <path d="M 340 120 L 380 120" stroke="#3399ff" stroke-width="2"/>
+                        <path d="M 340 130 L 380 130" stroke="#3399ff" stroke-width="2"/>
+                        <path d="M 350 110 L 350 140" stroke="#3399ff" stroke-width="1"/>
+                        <path d="M 370 110 L 370 140" stroke="#3399ff" stroke-width="1"/>
+                        
+                        <!-- ステップ3 -->
+                        <rect x="50" y="180" width="180" height="100" rx="10" ry="10" fill="#e6e6e6"/>
+                        <text x="140" y="200" font-size="14" text-anchor="middle" font-weight="bold">ステップ3: 水を絞る</text>
+                        <circle cx="140" cy="240" r="30" fill="#cccccc"/>
+                        <path d="M 120 230 C 115 235, 115 245, 120 250" stroke="#3399ff" stroke-width="2" fill="none"/>
+                        <path d="M 160 230 C 165 235, 165 245, 160 250" stroke="#3399ff" stroke-width="2" fill="none"/>
+                        <path d="M 120 240 L 160 240" stroke="#3399ff" stroke-width="2"/>
+                        
+                        <!-- ステップ4 -->
+                        <rect x="270" y="180" width="180" height="100" rx="10" ry="10" fill="#e6e6e6"/>
+                        <text x="360" y="200" font-size="14" text-anchor="middle" font-weight="bold">ステップ4: 乾燥させる</text>
+                        <circle cx="360" cy="240" r="30" fill="#cccccc"/>
+                        <path d="M 350 230 L 370 230" stroke="#ff9900" stroke-width="2"/>
+                        <path d="M 345 240 L 375 240" stroke="#ff9900" stroke-width="2"/>
+                        <path d="M 350 250 L 370 250" stroke="#ff9900" stroke-width="2"/>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 230 110 L 270 110" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 110 L 260 105 L 260 115 Z" fill="#666"/>
+                        
+                        <path d="M 360 160 L 360 170 L 140 170 L 140 180" stroke="#666" stroke-width="2"/>
+                        <path d="M 140 180 L 135 170 L 145 170 Z" fill="#666"/>
+                        
+                        <path d="M 230 230 L 270 230" stroke="#666" stroke-width="2"/>
+                        <path d="M 270 230 L 260 225 L 260 235 Z" fill="#666"/>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">新聞紙の準備</span>
+                        <p>新聞紙を小さく裂き、バケツに入れます。インクの少ない部分を選ぶといいでしょう。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">水に浸す</span>
+                        <p>新聞紙が完全に浸るまで水を入れ、24時間放置します。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">水を絞る</span>
+                        <p>新聞紙をザルに移し、水気をよく絞ります。重曹を加えてよく混ぜます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">乾燥させる</span>
+                        <p>天日で完全に乾くまで乾燥させます。粒状になるように時々かき混ぜましょう。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>新聞紙猫砂は経済的で環境にやさしいですが、完全に乾燥させるのに時間がかかります。梅雨時期や雨の日は室内の除湿機の近くで乾燥させると効果的です。乾燥が不十分だと猫の足に付きやすく、家中に広がってしまうので注意しましょう。</p>
+                    </div>
+                </div>
+                
+                <div id="litter3" class="tab-content">
+                    <h3>重曹混合ベースの猫砂レシピ</h3>
+                    
+                    <div class="ingredient-list">
+                        <span class="ingredient">小麦粉 2カップ</span>
+                        <span class="ingredient">重曹 1カップ</span>
+                        <span class="ingredient">コーンスターチ 1/2カップ</span>
+                        <span class="ingredient">水 1〜1.5カップ</span>
+                    </div>
+                    
+                    <svg class="svg-container" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="500" height="250" fill="#f9f9f9" rx="10" ry="10"/>
+                        
+                        <!-- タイトル -->
+                        <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">重曹混合猫砂の作り方</text>
+                        
+                        <!-- ステップ図 -->
+                        <rect x="40" y="50" width="420" height="180" fill="none" stroke="#ddd" stroke-width="1"/>
+                        
+                        <!-- ステップ1: 材料を混ぜる -->
+                        <rect x="50" y="60" width="90" height="160" fill="#f0f0f0" rx="5" ry="5"/>
+                        <text x="95" y="80" font-size="12" text-anchor="middle" font-weight="bold">1. 材料を混ぜる</text>
+                        
+                        <circle cx="95" cy="115" r="20" fill="#fff" stroke="#ccc"/>
+                        <circle cx="95" cy="115" r="15" fill="#f2d9d9"/>
+                        <text x="95" y="120" font-size="10" text-anchor="middle">小麦粉</text>
+                        
+                        <circle cx="95" cy="155" r="20" fill="#fff" stroke="#ccc"/>
+                        <circle cx="95" cy="155" r="15" fill="#d9f2f2"/>
+                        <text x="95" y="160" font-size="10" text-anchor="middle">重曹</text>
+                        
+                        <circle cx="95" cy="195" r="20" fill="#fff" stroke="#ccc"/>
+                        <circle cx="95" cy="195" r="15" fill="#f2f2d9"/>
+                        <text x="95" y="200" font-size="10" text-anchor="middle">コーンスターチ</text>
+                        
+                        <!-- ステップ2: 水を加える -->
+                        <rect x="150" y="60" width="90" height="160" fill="#f0f0f0" rx="5" ry="5"/>
+                        <text x="195" y="80" font-size="12" text-anchor="middle" font-weight="bold">2. 水を加える</text>
+                        
+                        <rect x="170" y="110" width="50" height="70" rx="5" ry="5" fill="#fff" stroke="#ccc"/>
+                        <path d="M 170 140 C 180 130, 210 130, 220 140" stroke="#99ccff" stroke-width="2" fill="none"/>
+                        <path d="M 170 150 C 180 140, 210 140, 220 150" stroke="#99ccff" stroke-width="2" fill="none"/>
+                        <path d="M 170 160 C 180 150, 210 150, 220 160" stroke="#99ccff" stroke-width="2" fill="none"/>
+                        
+                        <!-- ステップ3: 形成 -->
+                        <rect x="250" y="60" width="90" height="160" fill="#f0f0f0" rx="5" ry="5"/>
+                        <text x="295" y="80" font-size="12" text-anchor="middle" font-weight="bold">3. 形成</text>
+                        
+                        <circle cx="275" cy="130" r="10" fill="#e6e6e6"/>
+                        <circle cx="295" cy="150" r="10" fill="#e6e6e6"/>
+                        <circle cx="315" cy="130" r="10" fill="#e6e6e6"/>
+                        <circle cx="275" cy="170" r="10" fill="#e6e6e6"/>
+                        <circle cx="295" cy="190" r="10" fill="#e6e6e6"/>
+                        <circle cx="315" cy="170" r="10" fill="#e6e6e6"/>
+                        
+                        <!-- ステップ4: 乾燥 -->
+                        <rect x="350" y="60" width="90" height="160" fill="#f0f0f0" rx="5" ry="5"/>
+                        <text x="395" y="80" font-size="12" text-anchor="middle" font-weight="bold">4. 乾燥</text>
+                        
+                        <path d="M 370 120 L 375 110 L 380 120 L 385 110 L 390 120 L 395 110 L 400 120 L 405 110 L 410 120 L 415 110 L 420 120" stroke="#ff9900" stroke-width="1" fill="none"/>
+                        <circle cx="375" cy="150" r="8" fill="#ddd"/>
+                        <circle cx="395" cy="150" r="8" fill="#ddd"/>
+                        <circle cx="415" cy="150" r="8" fill="#ddd"/>
+                        <circle cx="375" cy="170" r="8" fill="#ddd"/>
+                        <circle cx="395" cy="170" r="8" fill="#ddd"/>
+                        <circle cx="415" cy="170" r="8" fill="#ddd"/>
+                        
+                        <!-- 矢印 -->
+                        <path d="M 140 140 L 150 140" stroke="#666" stroke-width="2"/>
+                        <path d="M 150 140 L 140 135 L 140 145 Z" fill="#666"/>
+                        
+                        <path d="M 240 140 L 250 140" stroke="#666" stroke-width="2"/>
+                        <path d="M 250 140 L 240 135 L 240 145 Z" fill="#666"/>
+                        
+                        <path d="M 340 140 L 350 140" stroke="#666" stroke-width="2"/>
+                        <path d="M 350 140 L 340 135 L 340 145 Z" fill="#666"/>
+                    </svg>
+                    
+                    <div class="step-container">
+                        <span class="step-number">1</span>
+                        <span class="step-title">材料を混ぜる</span>
+                        <p>小麦粉、重曹、コーンスターチを大きなボウルでよく混ぜます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">2</span>
+                        <span class="step-title">水を加える</span>
+                        <p>少しずつ水を加えながら、粘土状になるまで混ぜます。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">3</span>
+                        <span class="step-title">形成</span>
+                        <p>材料を小さな粒状に形成します。均一なサイズになるように注意しましょう。</p>
+                    </div>
+                    
+                    <div class="step-container">
+                        <span class="step-number">4</span>
+                        <span class="step-title">乾燥</span>
+                        <p>天日または低温のオーブン（120℃）で完全に乾くまで乾燥させます。</p>
+                    </div>
+                    
+                    <div class="memo-box">
+                        <p>重曹混合猫砂は消臭効果に優れており、特に臭いが気になる場合におすすめです。ただし、湿気に弱いので、梅雨時期や湿度の高い場所では劣化が早くなるかもしれません。密閉容器に保管して、使う分だけ出すようにするとよいでしょう。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>手作り猫砂の注意点</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>手作り猫砂を使用する際の注意点：</p>
+                    <ul>
+                        <li><strong>猫の好み：</strong>猫は新しい猫砂に敏感な場合があります。徐々に新しい猫砂に慣れさせましょう。</li>
+                        <li><strong>湿気対策：</strong>手作り猫砂は市販のものより湿気を吸収しやすいため、頻繁に交換が必要です。</li>
+                        <li><strong>安全性確認：</strong>猫が猫砂を食べる習慣がある場合は、安全な材料のみを使用しましょう。</li>
+                        <li><strong>定期的な交換：</strong>特におがくずタイプは細菌が増殖しやすいので、定期的な完全交換が必要です。</li>
+                        <li><strong>保管方法：</strong>乾燥した場所で密閉容器に保管し、湿気を避けましょう。</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>猫砂材料別比較</h3>
+            
+            <div class="info-card">
+                <div class="info-title">おがくず</div>
+                <div class="info-content">
+                    【吸収力】★★★☆☆<br>
+                    【消臭効果】★★☆☆☆<br>
+                    【コスト】★★★★★<br>
+                    【持続性】★★★☆☆<br>
+                    【メモ】ホームセンターで安価に入手可能。重曹を混ぜることで消臭効果を高められる。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">新聞紙</div>
+                <div class="info-content">
+                    【吸収力】★★★★☆<br>
+                    【消臭効果】★☆☆☆☆<br>
+                    【コスト】★★★★★<br>
+                    【持続性】★★☆☆☆<br>
+                    【メモ】最も経済的な選択肢。製作に時間がかかるが、リサイクルの観点では最も環境に優しい。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">重曹混合</div>
+                <div class="info-content">
+                    【吸収力】★★★☆☆<br>
+                    【消臭効果】★★★★★<br>
+                    【コスト】★★★☆☆<br>
+                    【持続性】★★★☆☆<br>
+                    【メモ】消臭効果が高く、臭いが気になる場合や集合住宅での使用に適している。
+                </div>
+            </div>
+        </section>
+        
+        <section id="product-dev">
+            <h2>🔬 高級無添加猫餌の商品開発・販売プロセス</h2>
+            
+            <p>高級・無添加路線の猫餌ビジネスでは、一般的なペットフードとは異なるアプローチが必要です。このセクションでは、商品開発から販売までの詳細なプロセスを解説します。特に製造工程に焦点を当てています。</p>
+            
+            <svg class="svg-container" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="320" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">高級無添加猫餌の開発・製造・販売フロー</text>
+                
+                <!-- タイムライン風レイアウト -->
+                <line x1="100" y1="60" x2="100" y2="300" stroke="#ccc" stroke-width="4"/>
+                
+                <!-- 各ステップ -->
+                <circle cx="100" cy="70" r="15" fill="#6a4c93"/>
+                <text x="130" y="75" font-size="14" font-weight="bold">市場調査・コンセプト設計</text>
+                
+                <circle cx="100" cy="110" r="15" fill="#6a4c93"/>
+                <text x="130" y="115" font-size="14" font-weight="bold">高級素材の調達ルート確保</text>
+                
+                <circle cx="100" cy="150" r="15" fill="#6a4c93"/>
+                <text x="130" y="155" font-size="14" font-weight="bold">レシピ開発・栄養設計</text>
+                
+                <circle cx="100" cy="190" r="15" fill="#6a4c93"/>
+                <text x="130" y="195" font-size="14" font-weight="bold">製造工程の確立</text>
+                <text x="350" y="195" font-size="12" fill="#666">→ 詳細は製造フローチャート参照</text>
+                
+                <circle cx="100" cy="230" r="15" fill="#6a4c93"/>
+                <text x="130" y="235" font-size="14" font-weight="bold">高級パッケージング開発</text>
+                
+                <circle cx="100" cy="270" r="15" fill="#6a4c93"/>
+                <text x="130" y="275" font-size="14" font-weight="bold">マーケティング・販売戦略</text>
+                
+                <!-- 右側にプレミアム感を表現する要素 -->
+                <rect x="320" y="60" width="150" height="30" rx="15" fill="#f8ad9d" opacity="0.7"/>
+                <text x="395" y="80" font-size="12" text-anchor="middle">高級感とは「価値」の提供</text>
+                
+                <rect x="320" y="100" width="150" height="30" rx="15" fill="#f8ad9d" opacity="0.7"/>
+                <text x="395" y="120" font-size="12" text-anchor="middle">透明性と品質を差別化に</text>
+                
+                <rect x="320" y="140" width="150" height="30" rx="15" fill="#f8ad9d" opacity="0.7"/>
+                <text x="395" y="160" font-size="12" text-anchor="middle">ターゲットは健康志向層</text>
+            </svg>
+            
+            <div class="info-card">
+                <div class="info-title">高級無添加猫餌市場のポイント</div>
+                <div class="info-content">
+                    高級・無添加ペットフードは年率15-20%で成長している有望市場です。特に「人間レベルの品質」を求める飼い主が増加しています。差別化ポイントは「透明性」「トレーサビリティ」「栄養価の高さ」「安全性」の4点に集約されます。プレミアム価格設定（一般商品の2-3倍）が可能ですが、それに見合う品質と価値の提供が不可欠です。
+                </div>
+            </div>
+            
+            <h3>🔍 1. 商品企画と原料調達</h3>
+            
+            <div class="step-container">
+                <span class="step-number">1</span>
+                <span class="step-title">ポジショニング戦略</span>
+                <p>高級無添加猫餌市場において、どのような差別化を図るかを決定します。「オーガニック特化」「特定の健康効果訴求」「地域食材こだわり」など、明確な特徴を持たせることが重要です。</p>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">2</span>
+                <span class="step-title">高級原材料の選定基準設定</span>
+                <p>以下の厳格な基準で原材料を選定します：</p>
+                <ul>
+                    <li>肉類：ヒューマングレード、有機認証、放し飼いまたは野生</li>
+                    <li>魚類：持続可能な漁業による、低水銀、小型魚種優先</li>
+                    <li>野菜類：有機認証、地元産、季節性を考慮</li>
+                    <li>サプリメント：製薬グレードのタウリン、高品質オメガ3</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">3</span>
+                <span class="step-title">調達ルートの確保</span>
+                <p>信頼できる供給元の確保が最重要です。理想的なのは以下の方法です：</p>
+                <ul>
+                    <li>地元の小規模有機農家との直接契約</li>
+                    <li>持続可能な漁業者からの直接購入</li>
+                    <li>高品質肉の専門卸売業者とのパートナーシップ</li>
+                    <li>すべての供給元の現地視察と定期的な品質監査</li>
+                </ul>
+            </div>
+            
+            <div class="point-box">
+                <p>高級無添加猫餌では、<strong>原材料の質</strong>こそが最大の差別化要因です。トレーサビリティ（原材料の生産地から最終製品までの追跡可能性）を確保し、これを顧客に伝えることで信頼を築きます。また、調達した原材料のロット管理を徹底し、万が一の問題発生時に迅速に対応できる体制を整えておくことも重要です。</p>
+            </div>
+            
+            <h3>📋 2. レシピ開発と栄養設計</h3>
+            
+            <svg class="svg-container" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="280" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">高級猫餌の栄養バランス設計</text>
+                
+                <!-- 円グラフ風の図 -->
+                <circle cx="150" cy="150" r="100" fill="none" stroke="#ccc" stroke-width="2"/>
+                
+                <!-- タンパク質セグメント -->
+                <path d="M 150 150 L 150 50 A 100 100 0 0 1 235 95 Z" fill="#ff9999"/>
+                <text x="195" y="90" font-size="14" font-weight="bold">タンパク質</text>
+                <text x="195" y="110" font-size="12">50-60%</text>
+                
+                <!-- 脂質セグメント -->
+                <path d="M 150 150 L 235 95 A 100 100 0 0 1 235 205 Z" fill="#99cc99"/>
+                <text x="250" y="150" font-size="14" font-weight="bold">脂質</text>
+                <text x="250" y="170" font-size="12">20-30%</text>
+                
+                <!-- 炭水化物セグメント -->
+                <path d="M 150 150 L 235 205 A 100 100 0 0 1 150 250 Z" fill="#9999ff"/>
+                <text x="195" y="220" font-size="14" font-weight="bold">炭水化物</text>
+                <text x="195" y="240" font-size="12">5-10%</text>
+                
+                <!-- 水分・ビタミン・ミネラルセグメント -->
+                <path d="M 150 150 L 150 250 A 100 100 0 0 1 65 205 Z" fill="#ffcc99"/>
+                <text x="100" y="220" font-size="14" font-weight="bold">水分</text>
+                <text x="100" y="240" font-size="12">5-10%</text>
+                
+                <!-- 繊維質セグメント -->
+                <path d="M 150 150 L 65 205 A 100 100 0 0 1 65 95 Z" fill="#cc99ff"/>
+                <text x="50" y="150" font-size="14" font-weight="bold">繊維質</text>
+                <text x="50" y="170" font-size="12">1-3%</text>
+                
+                <!-- タウリン・その他セグメント -->
+                <path d="M 150 150 L 65 95 A 100 100 0 0 1 150 50 Z" fill="#99ccff"/>
+                <text x="100" y="90" font-size="14" font-weight="bold">タウリン他</text>
+                <text x="100" y="110" font-size="12">2-4%</text>
+                
+                <!-- 右側の説明 -->
+                <rect x="320" y="70" width="150" height="160" rx="10" fill="#f0f0f0" stroke="#ccc"/>
+                <text x="395" y="90" font-size="14" text-anchor="middle" font-weight="bold">プレミアム配合の秘訣</text>
+                
+                <text x="330" y="120" font-size="12">• 複数のタンパク源を使用</text>
+                <text x="330" y="145" font-size="12">• 栄養密度の最適化</text>
+                <text x="330" y="170" font-size="12">• 消化率95%以上を目標</text>
+                <text x="330" y="195" font-size="12">• 食いつき向上の工夫</text>
+                <text x="330" y="220" font-size="12">• 年齢別栄養設計</text>
+            </svg>
+            
+            <div class="step-container">
+                <span class="step-number">1</span>
+                <span class="step-title">栄養学に基づく設計</span>
+                <p>高級猫餌では、単なる「無添加」だけではなく、最適な栄養バランスを科学的に設計します：</p>
+                <ul>
+                    <li>タンパク質：50-60%（複数の高品質動物性タンパク源を組み合わせ）</li>
+                    <li>脂質：20-30%（オメガ3とオメガ6の理想比率3:1を目指す）</li>
+                    <li>炭水化物：10%未満（低GI値の野菜由来のものに限定）</li>
+                    <li>タウリン：1000-1500mg/kg（加熱による損失を考慮して多めに）</li>
+                    <li>ビタミン・ミネラル：NRC（米国研究評議会）基準の120%以上</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">2</span>
+                <span class="step-title">高級感を演出するレシピ開発</span>
+                <p>高級感を出すための以下の工夫を取り入れます：</p>
+                <ul>
+                    <li>希少食材の少量配合（例：ノルウェー産鮭、ニュージーランド産ラム）</li>
+                    <li>スーパーフード添加（例：ブルーベリー、かぼちゃシード、海藻）</li>
+                    <li>機能性成分（例：グルコサミン、MSM、プロバイオティクス）</li>
+                    <li>天然香味成分（例：カツオエキス、鶏レバーパウダー）</li>
+                    <li>特徴的な色付け（例：ほうれん草パウダー、ビートルートなど天然着色料）</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">3</span>
+                <span class="step-title">試作と評価</span>
+                <p>開発したレシピを徹底的に検証します：</p>
+                <ul>
+                    <li>少量バッチでの複数パターン試作</li>
+                    <li>猫の嗜好性テスト（最低10頭以上の異なる猫で実施）</li>
+                    <li>栄養成分分析（外部ラボに依頼）</li>
+                    <li>消化率テスト（便の質・量の変化を観察）</li>
+                    <li>長期保存試験（1週間、1ヶ月、3ヶ月時点での品質評価）</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 3. 製造工程の詳細</h3>
+            
+            <svg class="svg-container" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="350" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">高級無添加猫餌の製造フローチャート</text>
+                
+                <!-- フローチャート -->
+                <!-- 原材料受け入れ -->
+                <rect x="50" y="60" width="120" height="40" rx="5" fill="#e6f2ff" stroke="#99ccff"/>
+                <text x="110" y="85" font-size="12" text-anchor="middle">原材料受け入れ・検査</text>
+                
+                <!-- 下矢印 -->
+                <line x1="110" y1="100" x2="110" y2="120" stroke="#666" stroke-width="2"/>
+                <polygon points="110,120 105,110 115,110" fill="#666"/>
+                
+                <!-- 肉類の下処理 -->
+                <rect x="50" y="120" width="120" height="40" rx="5" fill="#ffe6e6" stroke="#ff9999"/>
+                <text x="110" y="145" font-size="12" text-anchor="middle">肉類の下処理</text>
+                
+                <!-- 下矢印 -->
+                <line x1="110" y1="160" x2="110" y2="180" stroke="#666" stroke-width="2"/>
+                <polygon points="110,180 105,170 115,170" fill="#666"/>
+                
+                <!-- 最適温度での調理 -->
+                <rect x="50" y="180" width="120" height="40" rx="5" fill="#ffe6e6" stroke="#ff9999"/>
+                <text x="110" y="205" font-size="12" text-anchor="middle">最適温度での調理</text>
+                
+                <!-- 下矢印 -->
+                <line x1="110" y1="220" x2="110" y2="240" stroke="#666" stroke-width="2"/>
+                <polygon points="110,240 105,230 115,230" fill="#666"/>
+                
+                <!-- 冷却 -->
+                <rect x="50" y="240" width="120" height="40" rx="5" fill="#e6ffe6" stroke="#99cc99"/>
+                <text x="110" y="265" font-size="12" text-anchor="middle">急速冷却</text>
+                
+                <!-- 右矢印 -->
+                <line x1="170" y1="260" x2="190" y2="260" stroke="#666" stroke-width="2"/>
+                <polygon points="190,260 180,255 180,265" fill="#666"/>
+                
+                <!-- 野菜類の調理 -->
+                <rect x="190" y="60" width="120" height="40" rx="5" fill="#e6ffe6" stroke="#99cc99"/>
+                <text x="250" y="85" font-size="12" text-anchor="middle">野菜類の下処理・調理</text>
+                
+                <!-- 下矢印 -->
+                <line x1="250" y1="100" x2="250" y2="120" stroke="#666" stroke-width="2"/>
+                <polygon points="250,120 245,110 255,110" fill="#666"/>
+                
+                <!-- サプリメント計量 -->
+                <rect x="190" y="120" width="120" height="40" rx="5" fill="#e6f2ff" stroke="#99ccff"/>
+                <text x="250" y="145" font-size="12" text-anchor="middle">サプリメント計量</text>
+                
+                <!-- 下矢印 -->
+                <line x1="250" y1="160" x2="250" y2="180" stroke="#666" stroke-width="2"/>
+                <polygon points="250,180 245,170 255,170" fill="#666"/>
+                
+                <!-- 油脂類の計量 -->
+                <rect x="190" y="180" width="120" height="40" rx="5" fill="#ffe6e6" stroke="#ff9999"/>
+                <text x="250" y="205" font-size="12" text-anchor="middle">油脂類の計量・添加</text>
+                
+                <!-- 下矢印 -->
+                <line x1="250" y1="220" x2="250" y2="240" stroke="#666" stroke-width="2"/>
+                <polygon points="250,240 245,230 255,230" fill="#666"/>
+                
+                <!-- ブレンディング -->
+                <rect x="190" y="240" width="120" height="40" rx="5" fill="#fff2e6" stroke="#ffcc99"/>
+                <text x="250" y="265" font-size="12" text-anchor="middle">ブレンディング</text>
+                
+                <!-- 右矢印 -->
+                <line x1="310" y1="260" x2="330" y2="260" stroke="#666" stroke-width="2"/>
+                <polygon points="330,260 320,255 320,265" fill="#666"/>
+                
+                <!-- 品質検査 -->
+                <rect x="330" y="240" width="120" height="40" rx="5" fill="#f2e6ff" stroke="#cc99ff"/>
+                <text x="390" y="265" font-size="12" text-anchor="middle">品質検査</text>
+                
+                <!-- 上矢印 -->
+                <line x1="390" y1="240" x2="390" y2="220" stroke="#666" stroke-width="2"/>
+                <polygon points="390,220 385,230 395,230" fill="#666"/>
+                
+                <!-- パッケージング -->
+                <rect x="330" y="180" width="120" height="40" rx="5" fill="#e6ffff" stroke="#99ccff"/>
+                <text x="390" y="205" font-size="12" text-anchor="middle">パッケージング</text>
+                
+                <!-- 上矢印 -->
+                <line x1="390" y1="180" x2="390" y2="160" stroke="#666" stroke-width="2"/>
+                <polygon points="390,160 385,170 395,170" fill="#666"/>
+                
+                <!-- 冷凍・冷蔵保存 -->
+                <rect x="330" y="120" width="120" height="40" rx="5" fill="#e6f2ff" stroke="#99ccff"/>
+                <text x="390" y="145" font-size="12" text-anchor="middle">冷凍・冷蔵保存</text>
+                
+                <!-- 上矢印 -->
+                <line x1="390" y1="120" x2="390" y2="100" stroke="#666" stroke-width="2"/>
+                <polygon points="390,100 385,110 395,110" fill="#666"/>
+                
+                <!-- 出荷 -->
+                <rect x="330" y="60" width="120" height="40" rx="5" fill="#e6f2ff" stroke="#99ccff"/>
+                <text x="390" y="85" font-size="12" text-anchor="middle">出荷</text>
+                
+                <!-- 重要ポイント説明 -->
+                <rect x="50" y="300" width="400" height="30" rx="15" fill="#f8d7da" opacity="0.7"/>
+                <text x="250" y="320" font-size="12" text-anchor="middle" font-weight="bold">
+                    各工程で温度・時間管理を徹底し、栄養素の損失を最小限に
+                </text>
+            </svg>
+            
+            <div class="step-container">
+                <span class="step-number">1</span>
+                <span class="step-title">原材料の下処理</span>
+                <p>高級感と品質を保証する下処理工程の詳細：</p>
+                <ul>
+                    <li><strong>肉類</strong>：個別の最適温度で低温調理（65-70℃で鶏肉、62-65℃で牛肉など）を行い、栄養素を最大限保持しながら安全性を確保。</li>
+                    <li><strong>魚類</strong>：骨を完全除去した後、蒸し調理（85℃・10分）でタウリン損失を最小化。</li>
+                    <li><strong>内臓肉</strong>：特にレバーは必ず85℃以上で加熱し、細菌リスクを排除。</li>
+                    <li><strong>野菜類</strong>：消化吸収率を高めるため、適切な蒸し調理または低温ローストを実施。</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">2</span>
+                <span class="step-title">ブレンディングプロセス</span>
+                <p>均一で高品質な製品を作るための重要なステップ：</p>
+                <ul>
+                    <li>専用のフードプロセッサーで各材料を最適な大きさに調整</li>
+                    <li>肉と野菜を別々に処理し、その後ブレンド</li>
+                    <li>タウリンなどの熱に弱い栄養素は冷却後に添加</li>
+                    <li>油脂類（魚油など）は酸化を防ぐため最後に添加</li>
+                    <li>少量バッチ（最大5kg単位）での生産で品質を徹底管理</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">3</span>
+                <span class="step-title">品質管理プロセス</span>
+                <p>各バッチで以下の品質検査を実施：</p>
+                <ul>
+                    <li>目視検査：異物混入がないか、テクスチャーは均一か</li>
+                    <li>温度検査：各工程での温度記録と管理</li>
+                    <li>微生物検査：定期的なサンプリングによる安全性確認</li>
+                    <li>栄養成分検査：定期的な栄養価の分析</li>
+                    <li>嗜好性テスト：猫による実食テスト</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">4</span>
+                <span class="step-title">保存技術</span>
+                <p>無添加商品の鮮度を保つための工夫：</p>
+                <ul>
+                    <li>真空パック技術の活用で酸素による劣化を防止</li>
+                    <li>急速冷凍技術（-30℃で30分以内に凍結）で細胞破壊を最小限に</li>
+                    <li>個別小分けパックで解凍後の品質劣化を防止</li>
+                    <li>天然保存料（ローズマリーエキス、ビタミンE）の最小限使用</li>
+                    <li>バッチ番号と製造日の明記による完全トレーサビリティ</li>
+                </ul>
+            </div>
+            
+            <div class="point-box">
+                <p>高級無添加猫餌の製造では、<strong>一貫した品質管理</strong>が最も重要です。工程ごとの詳細な手順書を作成し、すべての製造過程を記録することで、問題発生時の原因追求を可能にします。また、<strong>コールドチェーン（低温流通）</strong>の確保も重要で、製造から顧客の手元に届くまで適切な温度管理を徹底します。</p>
+            </div>
+            
+            <h3>📦 4. 高級パッケージングと販売戦略</h3>
+            
+            <div class="step-container">
+                <span class="step-number">1</span>
+                <span class="step-title">高級感を演出するパッケージング</span>
+                <p>プレミアム商品にふさわしい包装デザイン：</p>
+                <ul>
+                    <li>環境に配慮した高級素材（リサイクル可能・生分解性）の使用</li>
+                    <li>機能性と美観を両立（再封可能、UV遮断、酸素バリア機能）</li>
+                    <li>ミニマリストでエレガントなデザイン（シンプルな色使い、高品質な印刷）</li>
+                    <li>透明窓付きパッケージで中身の品質を可視化</li>
+                    <li>QRコードによる原材料トレーサビリティ情報へのアクセス</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">2</span>
+                <span class="step-title">価格設定戦略</span>
+                <p>高級商品としての適切な価格ポジショニング：</p>
+                <ul>
+                    <li>原価計算：原材料費、製造コスト、包装費、人件費、輸送費</li>
+                    <li>市場価格分析：競合する高級ブランドの価格帯調査</li>
+                    <li>価値ベース価格設定：提供する価値（健康増進、安全性、希少性）に基づく設定</li>
+                    <li>スターターパック：初回お試し価格で顧客獲得</li>
+                    <li>サブスクリプションモデル：定期購入で10-15%割引</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">3</span>
+                <span class="step-title">販売チャネル戦略</span>
+                <p>高級猫餌の最適な販売方法：</p>
+                <ul>
+                    <li><strong>自社ECサイト</strong>：商品の背景ストーリーや製法を詳しく伝えられる</li>
+                    <li><strong>高級ペットショップ</strong>：厳選した店舗での取り扱い</li>
+                    <li><strong>獣医クリニック</strong>：健康に特化した商品としての信頼性向上</li>
+                    <li><strong>ファーマーズマーケット</strong>：消費者と直接対話できる場</li>
+                    <li><strong>SNSマーケティング</strong>：インスタグラム、YouTubeでの製造過程公開</li>
+                </ul>
+            </div>
+            
+            <div class="step-container">
+                <span class="step-number">4</span>
+                <span class="step-title">顧客体験の設計</span>
+                <p>高級感を演出する顧客体験：</p>
+                <ul>
+                    <li>パーソナライズされた栄養アドバイス</li>
+                    <li>美しいパッケージと「開封体験」の設計</li>
+                    <li>定期購入者への特典（専用容器、スクープなど）</li>
+                    <li>猫の健康状態フォローアップ</li>
+                    <li>愛猫写真共有コミュニティの形成</li>
+                </ul>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>高級猫餌ビジネス成功のための5つの秘訣</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>1. ストーリーテリング</strong>：単なる商品ではなく、「なぜこの猫餌を作ったのか」というストーリーを伝えることが重要です。私の場合は愛猫の皮膚トラブルがきっかけでしたが、このような個人的なストーリーが顧客との共感を生み出します。</p>
+                    <p><strong>2. 透明性の徹底</strong>：原材料の調達先、製造工程、栄養分析結果などをすべて公開します。「隠すものがない」という姿勢が高級商品には不可欠です。</p>
+                    <p><strong>3. 専門家との連携</strong>：獣医師や動物栄養士との協力関係を構築し、科学的根拠に基づいた商品開発を行います。専門家の推薦や監修は大きな信頼につながります。</p>
+                    <p><strong>4. 小規模から始める</strong>：最初から大量生産を目指さず、少量生産で品質を極めることが重要です。顧客基盤が固まってから徐々に拡大するのが理想的です。</p>
+                    <p><strong>5. コミュニティ形成</strong>：単なる販売者-購入者の関係ではなく、同じ価値観（猫の健康を最優先する）を共有するコミュニティを形成します。顧客の声を積極的に取り入れ、商品改良に活かすサイクルを作りましょう。</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">実績の数値例（開業2年目の場合）</div>
+                <div class="info-content">
+                    <ul>
+                        <li>製品ラインナップ：基本3種類＋季節限定2種類</li>
+                        <li>平均月間売上：120万円（顧客数約200人）</li>
+                        <li>リピート率：85%（サブスクリプション比率60%）</li>
+                        <li>平均客単価：6,000円</li>
+                        <li>粗利率：45-50%（高級素材使用のため原価率が高い）</li>
+                        <li>マーケティングコスト：売上の15%以内</li>
+                        <li>最も効果的な集客方法：Instagram（製造過程の透明性を示す投稿）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="knowledge">
+            <h2>📚 猫の食と健康の知識集</h2>
+            
+            <p>愛猫の健康を維持するためには、猫の食事と栄養に関する正しい知識が欠かせません。ここでは、猫の食事に関する重要な知識をまとめています。</p>
+            
+            <svg class="svg-container" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- 背景 -->
+                <rect width="500" height="300" fill="#f9f9f9" rx="10" ry="10"/>
+                
+                <!-- タイトル -->
+                <text x="250" y="30" font-size="16" text-anchor="middle" font-weight="bold">猫の必須栄養素マップ</text>
+                
+                <!-- 中心の猫シルエット -->
+                <path d="M 250 100 C 230 80, 230 60, 250 60 C 270 60, 270 80, 250 100" fill="#e6e6e6"/>
+                <path d="M 250 100 C 230 120, 210 140, 210 180 C 210 220, 230 240, 250 240 C 270 240, 290 220, 290 180 C 290 140, 270 120, 250 100" fill="#e6e6e6"/>
+                <circle cx="235" cy="80" r="5" fill="#333"/>
+                <circle cx="265" cy="80" r="5" fill="#333"/>
+                <path d="M 245 90 C 250 95, 255 90, 250 90" stroke="#333" stroke-width="1" fill="none"/>
+                
+                <!-- 栄養素と線 -->
+                <line x1="180" y1="70" x2="220" y2="90" stroke="#ff9999" stroke-width="2"/>
+                <circle cx="170" cy="60" r="25" fill="#ffe6e6"/>
+                <text x="170" y="65" font-size="12" text-anchor="middle" font-weight="bold">タンパク質</text>
+                
+                <line x1="330" y1="70" x2="280" y2="90" stroke="#99cc99" stroke-width="2"/>
+                <circle cx="340" cy="60" r="25" fill="#e6ffe6"/>
+                <text x="340" y="65" font-size="12" text-anchor="middle" font-weight="bold">脂肪</text>
+                
+                <line x1="140" y1="150" x2="210" y2="150" stroke="#9999ff" stroke-width="2"/>
+                <circle cx="120" cy="150" r="25" fill="#e6e6ff"/>
+                <text x="120" y="155" font-size="12" text-anchor="middle" font-weight="bold">タウリン</text>
+                
+                <line x1="360" y1="150" x2="290" y2="150" stroke="#ffcc99" stroke-width="2"/>
+                <circle cx="380" cy="150" r="25" fill="#fff2e6"/>
+                <text x="380" y="155" font-size="12" text-anchor="middle" font-weight="bold">ビタミン</text>
+                
+                <line x1="180" y1="230" x2="230" y2="200" stroke="#cc99ff" stroke-width="2"/>
+                <circle cx="160" cy="240" r="25" fill="#f2e6ff"/>
+                <text x="160" y="245" font-size="12" text-anchor="middle" font-weight="bold">ミネラル</text>
+                
+                <line x1="320" y1="230" x2="270" y2="200" stroke="#99ccff" stroke-width="2"/>
+                <circle cx="340" cy="240" r="25" fill="#e6f2ff"/>
+                <text x="340" y="245" font-size="12" text-anchor="middle" font-weight="bold">水分</text>
+                
+                <!-- 説明テキスト -->
+                <text x="250" y="270" font-size="12" text-anchor="middle">猫は肉食動物なので、肉由来のタンパク質とタウリンが特に重要</text>
+            </svg>
+            
+            <div class="info-card">
+                <div class="info-title">猫は完全な肉食動物</div>
+                <div class="info-content">
+                    猫は進化の過程で完全な肉食動物となりました。そのため、いくつかの必須栄養素（特にタウリン、アラキドン酸、ビタミンA、ビタミンD）を植物から得ることができず、動物性食品から摂取する必要があります。犬と違い、猫は穀物や野菜からの栄養素を効率よく消化・吸収することができません。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">タウリンの重要性</div>
+                <div class="info-content">
+                    タウリンは猫にとって必須のアミノ酸です。猫は他の動物と違い、体内でタウリンを十分に合成することができません。タウリン不足は、失明や心筋症などの深刻な健康問題を引き起こす可能性があります。肉や魚に含まれていますが、加熱によって減少するため、手作り食では補給が必要です。
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">猫にとって危険な食品</div>
+                <div class="info-content">
+                    以下の食品は猫にとって有毒であり、絶対に与えてはいけません：
+                    <ul>
+                        <li>玉ねぎ、ニンニク、ネギ類（赤血球を破壊する成分を含む）</li>
+                        <li>チョコレート（テオブロミンという毒性物質を含む）</li>
+                        <li>ブドウ・レーズン（急性腎不全を引き起こす可能性がある）</li>
+                        <li>キシリトール入りの食品（インスリン分泌を促進し低血糖を引き起こす）</li>
+                        <li>アルコール（肝臓と脳に深刻なダメージを与える）</li>
+                        <li>カフェイン（心臓や神経系に悪影響を及ぼす）</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">適切な水分摂取</div>
+                <div class="info-content">
+                    猫は元来砂漠地帯の動物であり、水をあまり飲まない傾向があります。野生では獲物から水分を摂取していました。そのため、ドライフードだけの食事では慢性的な水分不足になりやすく、尿路疾患のリスクが高まります。ウェットフードや手作り食を与えることで、水分摂取量を増やすことができます。
+                </div>
+            </div>
+            
+            <div class="point-box">
+                <p>猫の食事で最も重要なのは<strong>バランス</strong>です。特定の栄養素だけに偏らず、タンパク質、脂質、必須脂肪酸、ビタミン、ミネラル、水分のバランスが取れた食事を心がけましょう。不安な場合は、獣医師や動物栄養士に相談することをお勧めします。</p>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>年齢別の栄養ニーズ</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>子猫（生後12ヶ月未満）：</strong>成長期の子猫は、成猫の約2倍のエネルギーを必要とします。高タンパク質、高カロリーの食事が適しています。また、DHA（ドコサヘキサエン酸）は脳と目の発達に重要です。</p>
+                    <p><strong>成猫（1〜7歳）：</strong>健康維持のためのバランスの取れた食事が必要です。過剰な炭水化物は避け、高品質のタンパク質を中心にした食事が理想的です。</p>
+                    <p><strong>シニア猫（7歳以上）：</strong>加齢とともに消化能力や腎機能が低下するため、消化しやすく腎臓に負担をかけない食事が望ましいです。高品質なタンパク質と適切な脂肪含有量、そして十分な水分が重要です。また、関節の健康をサポートするグルコサミンとコンドロイチンも有益です。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="notes">
+            <h2>📝 個人的な学習メモ</h2>
+            
+            <p>このセクションでは、猫の餌と猫砂に関する私の実験や経験、学びをメモとして記録しています。</p>
+            
+            <div class="memo-box">
+                <h3>実験記録：タウリン添加量の調整（2023/10/15）</h3>
+                <p>愛猫のミミに与える手作り食のタウリン量を調整する実験を行いました。市販のタウリンサプリメントを使用し、1食あたり100mg、150mg、200mgの3パターンで2週間ずつ試しました。</p>
+                <p>結果：150mg以上で毛艶が明らかに良くなり、活発さも増しました。ただし、200mgでは特に追加の効果は見られなかったため、コスト面も考慮して1食あたり150mgに落ち着けることにしました。</p>
+            </div>
+            
+            <div class="memo-box">
+                <h3>猫砂の吸収力比較実験（2023/12/05）</h3>
+                <p>3種類の手作り猫砂（おがくず、新聞紙、重曹混合）の吸収力を比較するため、同量の水を滴下して吸収速度と吸収量を計測しました。</p>
+                <p>結果：新聞紙ベースが最も吸収量が多く、おがくずは吸収速度が最も速いことがわかりました。ただし、新聞紙ベースは湿気ると崩れやすいという欠点があります。結論として、普段使いには吸収速度が速いおがくずベースを基本とし、消臭目的で重曹を追加することにしました。</p>
+            </div>
+            
+            <div class="memo-box">
+                <h3>保存方法による栄養価への影響調査（2024/01/20）</h3>
+                <p>手作り猫餌の保存方法による影響を調べるため、同じバッチの餌を冷蔵・冷凍・真空パックの3種類の方法で保存し、1週間後の状態を比較しました。</p>
+                <p>結果：冷蔵は3日目から臭いが変化し始め、5日目には明らかな変質が見られました。冷凍は1週間後も問題なく、解凍後の食感も許容範囲内でした。真空パック＋冷凍が最も状態が良く、解凍後も臭いや食感の変化が最小限でした。今後は真空パック＋冷凍を標準の保存方法として採用します。</p>
+            </div>
+            
+            <div class="memo-box">
+                <h3>コスト計算メモ（2024/02/10）</h3>
+                <p>手作り猫餌と市販プレミアムキャットフードのコスト比較を行いました。</p>
+                <p>【手作り餌のコスト（10食分）】<br>
+                鶏肉: ¥400<br>
+                レバー: ¥150<br>
+                野菜類: ¥200<br>
+                卵: ¥50<br>
+                タウリン他サプリメント: ¥300<br>
+                電気・ガス代: ¥100<br>
+                合計: ¥1,200（1食あたり約¥120）</p>
+                <p>【プレミアムキャットフード（10食分）】<br>
+                高品質グレインフリー: ¥1,800（1食あたり約¥180）</p>
+                <p>結論：手作りの方が約33%コスト削減できることがわかりました。ただし、自分の労働時間を考慮すると、完全に経済的とは言えない面もあります。健康面でのメリットを重視して継続することにします。</p>
+            </div>
+            
+            <div class="point-box">
+                <p>手作り猫用品を作る上で最も重要なのは<strong>継続可能性</strong>です。完璧を求めすぎると長続きしません。自分のライフスタイルに合った方法を見つけ、無理なく続けられるルーティンを作ることが大切です。また、定期的に獣医師に相談し、愛猫の健康状態をチェックすることも忘れないようにしましょう。</p>
+            </div>
+            
+            <h3>今後の学習計画</h3>
+            
+            <div class="info-card">
+                <div class="info-title">調査したいトピック</div>
+                <div class="info-content">
+                    <ul>
+                        <li>猫の腸内細菌と発酵食品の関係</li>
+                        <li>年齢に応じた栄養バランスの調整方法</li>
+                        <li>天然の防腐剤（ローズマリーエキスなど）の効果</li>
+                        <li>猫の味覚に関する最新研究</li>
+                        <li>環境に優しい猫砂の新素材と製法</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">読みたい専門書</div>
+                <div class="info-content">
+                    <ul>
+                        <li>「猫の栄養学」（仮）</li>
+                        <li>「ペットフードの真実」（仮）</li>
+                        <li>「自然療法で健康に暮らす猫」（仮）</li>
+                        <li>「動物栄養学の基礎」（仮）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2025 猫ごはん工房 個人的学習ノート</p>
+        <p>このサイトは個人的な学習と記録のために作成したものです。内容の正確性については保証できません。愛猫の健康に関することは、獣医師にご相談ください。</p>
+    </footer>
+    
+    <script>
+        // タブの切り替え機能
+        function openTab(evt, tabId) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("show");
+            }
+            
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabId).classList.add("show");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // アコーディオンの切り替え機能
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle("show");
+            
+            const plusMinus = element.lastElementChild;
+            if (plusMinus.textContent === "+") {
+                plusMinus.textContent = "-";
+            } else {
+                plusMinus.textContent = "+";
+            }
+        }
+        
+        // ナビゲーションのアクティブ状態の切り替え
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').substring(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // モバイルでのナビゲーション表示の調整
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
