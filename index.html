@@ -3,948 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>近藤法律事務所 | 刑事弁護専門</title>
+    <title>損益計算書</title>
     <style>
-        :root {
-            --primary-color: #1a2639;
-            --secondary-color: #8b0000;
-            --accent-color: #d4af37;
-            --light-bg: #f5f5f5;
-            --text-color: #333;
-            --light-text: #fff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans JP', sans-serif;
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
         }
         
         body {
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
+            font-family: "MS Mincho", "ＭＳ 明朝", serif;
+            max-width: 100%;
             margin: 0 auto;
-        }
-        
-        /* ヘッダーセクション */
-        header {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        header.scrolled {
-            padding: 10px 0;
-            background-color: rgba(26, 38, 57, 0.95);
-        }
-        
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-left: 10px;
-        }
-        
-        .logo span {
-            color: var(--accent-color);
-            font-weight: 300;
-            font-size: 14px;
-            display: block;
-            letter-spacing: 2px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: var(--light-text);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-        
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        /* メインビジュアルセクション */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/800') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            color: var(--light-text);
-            position: relative;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding-top: 80px;
-        }
-        
-        .hero h2 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            text-decoration: none;
-            border-radius: 3px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--light-text);
-            margin-left: 15px;
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--light-text);
-            color: var(--primary-color);
-        }
-        
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-        
-        /* 特徴セクション */
-        .section {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h3 {
-            font-size: 36px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h3::after {
-            content: "";
-            height: 3px;
-            width: 60px;
-            background-color: var(--accent-color);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .section-title p {
-            color: #777;
-            font-size: 18px;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-box {
+            padding: 10px;
             background-color: white;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            color: black;
         }
         
-        .feature-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .feature-icon {
-            height: 200px;
-            background-color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-text);
-            font-size: 50px;
-        }
-        
-        .feature-content {
-            padding: 30px;
-        }
-        
-        .feature-content h4 {
+        h1 {
+            text-align: center;
             font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary-color);
+            margin: 15px 0;
+            text-decoration: underline;
+            font-weight: bold;
         }
         
-        .feature-content p {
-            font-size: 16px;
-            color: #666;
-        }
-        
-        /* 実績セクション */
-        .achievements {
-            background-color: var(--light-bg);
-        }
-        
-        .cases {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .case {
-            background-color: white;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .case:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .case-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-        }
-        
-        .case-header h4 {
-            font-size: 20px;
-        }
-        
-        .case-header span {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        .case-content {
-            padding: 20px;
-        }
-        
-        .case-content p {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        
-        .verdict {
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-        
-        /* プロフィールセクション */
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .profile-image {
-            flex: 1;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .profile-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .profile-content {
-            flex: 1;
-        }
-        
-        .profile-content h3 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .profile-content p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #666;
-        }
-        
-        .profile-content ul {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        
-        .profile-content ul li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .profile-content ul li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--secondary-color);
-            font-weight: 700;
-        }
-        
-        /* お問い合わせセクション */
-        .contact {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-        }
-        
-        .contact .section-title h3 {
-            color: var(--light-text);
-        }
-        
-        .contact .section-title p {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .contact-item {
-            margin-bottom: 30px;
-        }
-        
-        .contact-item h4 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--accent-color);
-        }
-        
-        .contact-item p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .contact-form {
-            background-color: white;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        /* フッターセクション */
-        footer {
-            background-color: #111;
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-column h4 {
-            color: white;
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h4::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-column ul li a:hover {
-            color: var(--accent-color);
-            padding-left: 5px;
-        }
-        
-        .copyright {
+        .period {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
+            font-size: 16px;
+            margin: 15px 0 25px 0;
         }
         
-        @media (max-width: 992px) {
-            .header-inner {
-                flex-direction: column;
-                text-align: center;
+        .company {
+            text-align: left;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        
+        .unit {
+            text-align: right;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            border: 1px solid #000;
+            padding: 6px 4px;
+            text-align: left;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        
+        .amount {
+            text-align: right;
+        }
+        
+        .category {
+            font-weight: bold;
+        }
+        
+        .subcategory {
+            padding-left: 20px;
+        }
+        
+        .total {
+            font-weight: bold;
+        }
+        
+        .indent {
+            padding-left: 30px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
             }
             
-            nav ul {
-                margin-top: 20px;
-            }
-            
-            .hero h2 {
-                font-size: 36px;
-            }
-            
-            .hero p {
+            h1 {
                 font-size: 18px;
             }
             
-            .profile {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+            .period, .company, .unit {
+                font-size: 14px;
             }
             
-            nav ul li {
-                margin: 10px 0;
+            th, td {
+                padding: 4px 2px;
+                font-size: 12px;
             }
             
-            .btn {
-                display: block;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-            
-            .btn-outline {
-                margin-left: 0;
+            .subcategory {
+                padding-left: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ヘッダーセクション -->
-    <header>
-        <div class="container header-inner">
-            <div class="logo">
-                <h1>近藤法律事務所<span>KONDO LAW OFFICE</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#about">事務所案内</a></li>
-                    <li><a href="#services">取扱業務</a></li>
-                    <li><a href="#achievements">実績</a></li>
-                    <li><a href="#profile">弁護士紹介</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- メインビジュアルセクション -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h2>あなたの権利を守り、<br>最善の結果を追求します</h2>
-            <p>刑事事件専門の弁護士として、豊富な経験と実績を持つ近藤法律事務所が、あなたの味方になります。</p>
-            <a href="#contact" class="btn">無料相談のご予約</a>
-            <a href="#services" class="btn btn-outline">取扱業務を見る</a>
-        </div>
-        <div class="scroll-down">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- 特徴セクション -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h3>なぜ近藤法律事務所が選ばれるのか</h3>
-                <p>刑事弁護に特化した私たちの強み</p>
-            </div>
-            <div class="features">
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2"/>
-                            <path d="M12 8V12L15 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>24時間対応</h4>
-                        <p>緊急の逮捕や勾留に対応するため、24時間体制でご相談を受け付けています。お客様が必要な時に、すぐに対応します。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 5V7M15 11V13M15 17V19M5 5H19C20.1046 5 21 5.89543 21 7V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V7C3 5.89543 3.89543 5 5 5Z" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M9 9L7 11L9 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>刑事専門の知識</h4>
-                        <p>刑事事件に特化した専門知識と豊富な実務経験により、複雑な事件でも的確な弁護戦略を立案します。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 12L11 14L15 10M12 3L2 10L12 17L22 10L12 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M19 14V20M5 14V20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>無罪実績の豊富な経験</h4>
-                        <p>多数の無罪判決・不起訴処分を勝ち取ってきた確かな実績があります。お客様の権利を最大限に守ります。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 取扱業務セクション -->
-    <section id="services" class="section" style="background-color: var(--light-bg);">
-        <div class="container">
-            <div class="section-title">
-                <h3>取扱業務</h3>
-                <p>刑事事件に特化した法的サービス</p>
-            </div>
-            <div class="features">
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 20V10H8V20M3 20H8M3 20H1M8 20H13M15 14V20M15 20H13M15 20H21M13 20V10C13 8.89543 13.8954 8 15 8H19C20.1046 8 21 8.89543 21 10V20M7 10V5C7 3.89543 7.89543 3 9 3H11C12.1046 3 13 3.89543 13 5V10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>身柄解放・勾留回避</h4>
-                        <p>逮捕直後の対応から勾留回避、保釈請求まで、迅速かつ効果的な対応で身柄の早期解放を目指します。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 8H19M5 8C3.89543 8 3 7.10457 3 6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6C21 7.10457 20.1046 8 19 8M5 8L5 18C5 19.1046 5.89543 20 7 20H17C18.1046 20 19 19.1046 19 18V8M10 12H14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>刑事裁判弁護</h4>
-                        <p>証拠の徹底分析と効果的な反論により、無罪、罪状の軽減、不起訴処分などの最善の結果を追求します。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 4L4 8L12 12L20 8L12 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4 12L12 16L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4 16L12 20L20 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>刑事示談交渉</h4>
-                        <p>被害者との適切な示談交渉を行い、和解による刑事処分の軽減や早期解決を図ります。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>執行猶予・情状弁護</h4>
-                        <p>情状証拠の収集と効果的な弁護活動により、執行猶予付判決や刑の軽減を目指します。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 6V4M8 6V8M8 6H12M16 6V4M16 6V8M16 6H12M4 10V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V10H4Z" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>再審請求</h4>
-                        <p>確定判決に対する再審請求を通じて、冤罪の救済と正義の実現に全力を尽くします。</p>
-                    </div>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 14L11.3 13.3C11.1 13.1 11 12.9 11 12.6C11 12.4 11.1 12.2 11.3 12C11.5 11.8 11.7 11.7 12 11.7C12.3 11.7 12.5 11.8 12.7 12L13 12.3L15.3 10C15.5 9.8 15.7 9.7 16 9.7C16.3 9.7 16.5 9.8 16.7 10C16.9 10.2 17 10.4 17 10.7C17 11 16.9 11.2 16.7 11.4L13.7 14.4C13.5 14.6 13.3 14.7 13 14.7C12.7 14.7 12.5 14.6 12.3 14.4L12 14Z" fill="white"/>
-                            <path d="M9 16H7C5.9 16 5 15.1 5 14V6C5 4.9 5.9 4 7 4H17C18.1 4 19 4.9 19 6V14C19 15.1 18.1 16 17 16H15M9 16V20H15V16M9 16H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content">
-                        <h4>刑事事件の法律相談</h4>
-                        <p>刑事事件に関するあらゆる法律相談に対応し、適切なアドバイスと今後の方針を提案します。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 実績セクション -->
-    <section id="achievements" class="section achievements">
-        <div class="container">
-            <div class="section-title">
-                <h3>弁護実績</h3>
-                <p>多数の無罪判決・不起訴処分を勝ち取ってきました</p>
-            </div>
-            <div class="cases">
-                <div class="case">
-                    <div class="case-header">
-                        <h4>窃盗事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>監視カメラの映像と目撃証言のみが証拠となった窃盗事件。防犯カメラの映像の鑑定と目撃証言の信用性に疑問を投げかける弁護活動を行いました。</p>
-                        <p class="verdict">結果：無罪判決</p>
-                    </div>
-                </div>
-                <div class="case">
-                    <div class="case-header">
-                        <h4>詐欺事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>契約書の解釈をめぐって詐欺罪に問われた事件。民事上の解釈の相違に過ぎず、詐欺の故意がなかったことを立証しました。</p>
-                        <p class="verdict">結果：無罪判決</p>
-                    </div>
-                </div>
-                <div class="case">
-                    <div class="case-header">
-                        <h4>強制わいせつ事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>被害者の供述のみが証拠となった強制わいせつ事件。供述の信用性に疑問を投げかけ、アリバイ証拠を提出しました。</p>
-                        <p class="verdict">結果：無罪判決</p>
-                    </div>
-                </div>
-                <div class="case">
-                    <div class="case-header">
-                        <h4>傷害事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>正当防衛の主張が認められなかった傷害事件。証人尋問と現場検証により、正当防衛の成立を立証しました。</p>
-                        <p class="verdict">結果：無罪判決</p>
-                    </div>
-                </div>
-                <div class="case">
-                    <div class="case-header">
-                        <h4>業務上過失致死事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>医療過誤による業務上過失致死事件。専門家の鑑定を通じて、因果関係の不存在を立証しました。</p>
-                        <p class="verdict">結果：無罪判決</p>
-                    </div>
-                </div>
-                <div class="case">
-                    <div class="case-header">
-                        <h4>覚醒剤取締法違反事件</h4>
-                        <span>東京地方裁判所</span>
-                    </div>
-                    <div class="case-content">
-                        <p>覚醒剤所持の現行犯逮捕事件。違法な職務質問と所持品検査により発見された証拠の証拠能力を争いました。</p>
-                        <p class="verdict">結果：証拠排除により無罪</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- プロフィールセクション -->
-    <section id="profile" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h3>弁護士紹介</h3>
-                <p>経験豊富な刑事専門弁護士</p>
-            </div>
-            <div class="profile">
-                <div class="profile-image">
-                    <img src="/api/placeholder/600/800" alt="近藤 誠二 弁護士">
-                </div>
-                <div class="profile-content">
-                    <h3>近藤 誠二（こんどう せいじ）</h3>
-                    <p>東京大学法学部卒業後、司法試験に合格。東京地方検察庁での検事経験を経て、現在は刑事弁護専門の弁護士として活動しています。検察官としての経験と知識を活かし、刑事事件の弁護において多数の無罪判決を勝ち取ってきました。</p>
-                    <ul>
-                        <li>第二東京弁護士会所属</li>
-                        <li>元東京地方検察庁検事</li>
-                        <li>日本刑事法学会会員</li>
-                        <li>刑事弁護人認定弁護士</li>
-                        <li>司法研修所刑事弁護教官</li>
-                    </ul>
-                    <p>「被疑者・被告人の権利を守り、公正な裁判を実現することが私の使命です。常に依頼者の立場に立ち、最善の結果を追求します。」</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- お問い合わせセクション -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="section-title">
-                <h3>お問い合わせ</h3>
-                <p>24時間対応・初回相談無料</p>
-            </div>
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h4>所在地</h4>
-                        <p>〒100-0004<br>東京都千代田区大手町1-1-1<br>大手町タワー15階</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>アクセス</h4>
-                        <p>東京メトロ大手町駅 A1出口より徒歩2分<br>JR東京駅 丸の内北口より徒歩8分</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>営業時間</h4>
-                        <p>平日 9:00 - 18:00<br>（緊急の場合は24時間対応）</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>電話番号</h4>
-                        <p>03-1234-5678（代表）<br>03-5678-1234（24時間緊急ダイヤル）</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>メールアドレス</h4>
-                        <p>info@kondo-law.com</p>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <label for="name">お名前</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">メールアドレス</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">電話番号</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">件名</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">メッセージ</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">送信する</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- フッターセクション -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>近藤法律事務所</h4>
-                    <p>〒100-0004<br>東京都千代田区大手町1-1-1<br>大手町タワー15階</p>
-                    <p>電話：03-1234-5678（代表）</p>
-                </div>
-                <div class="footer-column">
-                    <h4>取扱業務</h4>
-                    <ul>
-                        <li><a href="#services">身柄解放・勾留回避</a></li>
-                        <li><a href="#services">刑事裁判弁護</a></li>
-                        <li><a href="#services">刑事示談交渉</a></li>
-                        <li><a href="#services">執行猶予・情状弁護</a></li>
-                        <li><a href="#services">再審請求</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>事務所案内</h4>
-                    <ul>
-                        <li><a href="#about">事務所の特徴</a></li>
-                        <li><a href="#profile">弁護士紹介</a></li>
-                        <li><a href="#achievements">弁護実績</a></li>
-                        <li><a href="#contact">アクセス</a></li>
-                        <li><a href="#contact">お問い合わせ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 近藤法律事務所 All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // ヘッダースクロール効果
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    <h1>損 益 計 算 書</h1>
+    <div class="period">2024年03月01日 ～ 2025年02月28日</div>
+    <div class="company">株式会社こけし組合</div>
+    <div class="unit">(単位： 円)</div>
+    
+    <table>
+        <tr>
+            <th style="width: 65%;">科 目</th>
+            <th style="width: 35%;">金 額</th>
+        </tr>
+        <!-- 売上高 -->
+        <tr>
+            <td class="category">【売上高】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory">売　　上　　高</td>
+            <td class="amount">340,782,593</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">売　上　高　　計</td>
+            <td class="amount total">340,782,593</td>
+        </tr>
         
-        // スムーススクロール
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+        <!-- 売上原価 -->
+        <tr>
+            <td class="category">【売上原価】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory">当　期　商　品　仕　入</td>
+            <td class="amount">27,262,607</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">売　上　原　価　　計</td>
+            <td class="amount total">27,262,607</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">売　上　総　利　益</td>
+            <td class="amount total">313,519,986</td>
+        </tr>
+        
+        <!-- 販売管理費 -->
+        <tr>
+            <td class="category">【販売管理費】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory total">販 売 管 理 費　　計</td>
+            <td class="amount total">23,854,782</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">営　　業　　利　　益</td>
+            <td class="amount total">289,665,204</td>
+        </tr>
+        
+        <!-- 営業外収益 -->
+        <tr>
+            <td class="category">【営業外収益】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory">受　　取　　利　　息</td>
+            <td class="amount">119,873,425</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">営 業 外 収 益　　計</td>
+            <td class="amount total">119,873,425</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">経　　常　　利　　益</td>
+            <td class="amount total">409,538,629</td>
+        </tr>
+        
+        <!-- 特別損失 -->
+        <tr>
+            <td class="category">【特別損失】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory">固 定 資 産 売 却 損 益</td>
+            <td class="amount">3,654,321</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">特　別　損　失　　計</td>
+            <td class="amount total">3,654,321</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">税 引 前 当 期 純 利 益</td>
+            <td class="amount total">405,884,308</td>
+        </tr>
+        
+        <!-- 法人税等 -->
+        <tr>
+            <td class="category">【法人税等】</td>
+            <td class="amount"></td>
+        </tr>
+        <tr>
+            <td class="subcategory">法人税・住民税及び事業税</td>
+            <td class="amount">121,765,292</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">法　人　税　等　　計</td>
+            <td class="amount total">121,765,292</td>
+        </tr>
+        <tr>
+            <td class="subcategory total">当　期　純　利　益</td>
+            <td class="amount total">284,119,016</td>
+        </tr>
+    </table>
 </body>
 </html>
