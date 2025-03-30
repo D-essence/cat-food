@@ -3,220 +3,597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>損益計算書</title>
+    <title>対人マニュアル</title>
     <style>
-        @media print {
-            body {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
+        :root {
+            --green: #2ecc71;
+            --blue: #3498db;
+            --red: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --shadow: rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
         
         body {
-            font-family: "MS Mincho", "ＭＳ 明朝", serif;
-            max-width: 100%;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--dark);
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        
+        .green {
+            background-color: var(--green);
+        }
+        
+        .blue {
+            background-color: var(--blue);
+        }
+        
+        .red {
+            background-color: var(--red);
+        }
+        
+        .types-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .types-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .type-card {
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             background-color: white;
-            color: black;
         }
         
-        h1 {
-            text-align: center;
-            font-size: 22px;
-            margin: 15px 0;
-            text-decoration: underline;
-            font-weight: bold;
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .period {
-            text-align: center;
-            font-size: 16px;
-            margin: 15px 0 25px 0;
+        .type-card.value {
+            border-left: 5px solid var(--green);
         }
         
-        .company {
-            text-align: left;
-            font-size: 16px;
-            margin: 5px 0;
+        .type-card.harmless {
+            border-left: 5px solid var(--blue);
         }
         
-        .unit {
-            text-align: right;
-            font-size: 14px;
-            margin: 5px 0;
+        .type-card.caution {
+            border-left: 5px solid var(--red);
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            table-layout: fixed;
+        .type-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            position: relative;
         }
         
-        th, td {
-            border: 1px solid #000;
-            padding: 6px 4px;
-            text-align: left;
-            font-size: 14px;
-            vertical-align: middle;
+        .type-name::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 3px;
         }
         
-        .amount {
-            text-align: right;
+        .value .type-name::after {
+            background-color: var(--green);
         }
         
-        .category {
-            font-weight: bold;
+        .harmless .type-name::after {
+            background-color: var(--blue);
         }
         
-        .subcategory {
+        .caution .type-name::after {
+            background-color: var(--red);
+        }
+        
+        .type-summary {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            color: white;
+        }
+        
+        .value .type-summary {
+            background-color: var(--green);
+        }
+        
+        .harmless .type-summary {
+            background-color: var(--blue);
+        }
+        
+        .caution .type-summary {
+            background-color: var(--red);
+        }
+        
+        .type-features {
+            margin-bottom: 20px;
+        }
+        
+        .type-handling {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "▪";
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .value .section-title::before {
+            color: var(--green);
+        }
+        
+        .harmless .section-title::before {
+            color: var(--blue);
+        }
+        
+        .caution .section-title::before {
+            color: var(--red);
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        li {
+            position: relative;
             padding-left: 20px;
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
         
-        .total {
-            font-weight: bold;
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #999;
         }
         
-        .indent {
-            padding-left: 30px;
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
         }
         
-        @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-            
-            h1 {
-                font-size: 18px;
-            }
-            
-            .period, .company, .unit {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 4px 2px;
-                font-size: 12px;
-            }
-            
-            .subcategory {
-                padding-left: 10px;
-            }
+        /* ノード関連付けアニメーション用の線 */
+        .connection-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
         }
     </style>
 </head>
 <body>
-    <h1>損 益 計 算 書</h1>
-    <div class="period">2024年03月01日 ～ 2025年02月28日</div>
-    <div class="company">株式会社こけし組合</div>
-    <div class="unit">(単位： 円)</div>
+    <div class="container">
+        <header>
+            <h1>対人マニュアル</h1>
+            <p>人間タイプを理解し、効率的に関係を構築するための戦略的ガイド</p>
+        </header>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color green"></div>
+                <span>価値あり - 関係構築推奨</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color blue"></div>
+                <span>無害 - 最小限の関与</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color red"></div>
+                <span>要注意 - 戦略的対応必須</span>
+            </div>
+        </div>
+        
+        <div class="types-grid">
+            <!-- カリスマ -->
+            <div class="type-card value">
+                <h2 class="type-name">カリスマ</h2>
+                <div class="type-summary">最高の同盟者 - 獲得に全力を</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>強い独創性と神秘性を備え、普通の人間には理解できない魅力を放つ</li>
+                        <li>自分の世界観や原理原則を持ち、それに基づいて行動する一貫性がある</li>
+                        <li>賢い人や優秀な人から深い信頼と尊敬を受ける傾向が強い</li>
+                        <li>大衆からは理解されず、恐怖や嫉妬、時には強い憎悪の対象となる</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>信頼獲得には「高いコンテンツ力」「明確な有益性」「絶対的信用」のいずれかを示す</li>
+                        <li>表面的な取り入りや媚びは逆効果、誠実さと実力で勝負する</li>
+                        <li>一度信頼関係を構築できれば、あらゆる困難に立ち向かう最強の味方に</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 影の実力者 -->
+            <div class="type-card value">
+                <h2 class="type-name">影の実力者</h2>
+                <div class="type-summary">長期的価値の源泉 - 信頼構築に投資</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>言葉より行動で示し、約束を必ず実行する確固たる信頼性がある</li>
+                        <li>表舞台より裏方を好み、実質的な成果や結果を重視する</li>
+                        <li>賢明な人々から高い評価と深い信頼を得やすい実力本位の存在</li>
+                        <li>一度構築した信頼関係は容易に崩れず、長期的関係を重視する</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>表面的な関わりではなく唯一無二で本質的な関わりを目指す</li>
+                        <li>彼らの専門性や能力を正当に評価し、敬意を持って接する</li>
+                        <li>短期の利益より持続的な信頼関係構築に投資する価値あり</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 宇宙人 -->
+            <div class="type-card value">
+                <h2 class="type-name">宇宙人</h2>
+                <div class="type-summary">創造の源泉 - 独創性を尊重し活用</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>常識や社会規範から大きく外れた独自の思考回路と行動パターンを持つ</li>
+                        <li>予測不可能性と独創性があり、時にマヌケな一面も見せる複雑な存在</li>
+                        <li>ユニークな視点や発想で、従来にない解決策や創造性を発揮する</li>
+                        <li>アンテナ感度が高く、新しい価値や可能性に敏感に反応する</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>常識や形式にとらわれず、自由な発想と対話を楽しむ姿勢で接する</li>
+                        <li>奇抜な発想や行動を否定せず、むしろその可能性や面白さを評価する</li>
+                        <li>組織や枠組みに押し込めようとせず、個性を活かした関係を構築</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- スター -->
+            <div class="type-card value">
+                <h2 class="type-name">スター</h2>
+                <div class="type-summary">影響力の触媒 - 活用しつつ実体を見抜く</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>大衆の願望や理想を反映した存在で、時代の気分を体現している</li>
+                        <li>表面的な魅力や人気が高く、メディアや大衆文化と親和性がある</li>
+                        <li>意思の弱い大衆からは熱狂的に支持され、憧れの対象となる</li>
+                        <li>状況や流行に敏感で、自分の立ち位置を常に調整できる適応力がある</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>彼らのイメージや評判を尊重し、それを高める方向で関わる</li>
+                        <li>彼らが持つ影響力やネットワークを尊重し、それを活用する</li>
+                        <li>賢明に見極め、表面的人気に惑わされず実体を見抜く目を持つ</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- オタク -->
+            <div class="type-card value">
+                <h2 class="type-name">オタク</h2>
+                <div class="type-summary">専門価値の宝庫 - 分野依存で活用</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>特定の分野やコンテンツに対して異常なほどの知識と情熱を持つ</li>
+                        <li>社会的な交流より自分の興味ある分野に時間とエネルギーを投入する</li>
+                        <li>特定の専門分野では驚異的な能力や知識を発揮する</li>
+                        <li>一般的に攻撃性が低く、対立や争いを避ける平和主義的な傾向がある</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>興味関心に共感を示し、その世界観や背景知識を共有する</li>
+                        <li>専門知識や能力を正当に評価し、それを活かせる機会を提供する</li>
+                        <li>特定分野の専門家として尊重し、無料ガチャ感覚で関わる</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 平和主義者 -->
+            <div class="type-card harmless">
+                <h2 class="type-name">平和主義者</h2>
+                <div class="type-summary">無害な存在 - 穏やかに放置</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>誰とでも穏やかな関係を維持し、対立や摩擦を極力避ける</li>
+                        <li>当たり障りのない会話と態度で、初対面でも違和感なく接する</li>
+                        <li>感情の起伏が少なく、激しい対立や情熱的な関わりを好まない</li>
+                        <li>安定と平和を最も重視し、リスクや変化を避ける保守的な姿勢を持つ</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>基本的に中立のNPCのような存在、特別な関わり方は不要</li>
+                        <li>強い意見や対立を避け、穏やかで平和な交流を維持する</li>
+                        <li>日常的な交流や情報交換程度の関係を維持し、期待しない</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 雑草 -->
+            <div class="type-card harmless">
+                <h2 class="type-name">雑草</h2>
+                <div class="type-summary">完全放置を推奨 - 時間投資価値なし</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>知性や意思の力が極めて弱く、自発的な思考や行動がほとんど見られない</li>
+                        <li>環境に強く依存し、周囲の状況や他者の影響に完全に左右される</li>
+                        <li>長期的な目標や計画を持たず、その場の刺激や欲求に反応して生きている</li>
+                        <li>生存本能は強いが、それ以上の高次の欲求や価値観をほとんど持たない</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>関わっても実質的な利益や意味はないが、無害なので放置して良い</li>
+                        <li>必要以上に時間やエネルギーを投資せず、最小限の礼儀だけ保つ</li>
+                        <li>集団の一部として扱い、個別の特別な関係構築を試みない</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 八方美人 -->
+            <div class="type-card harmless">
+                <h2 class="type-name">八方美人</h2>
+                <div class="type-summary">機能的関係のみ - 深入り禁止</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>あらゆる人々と表面的な良好関係を築き、どんな集団にも適応できる</li>
+                        <li>深い信頼関係より広い人間関係を優先し、本質的なつながりが希薄</li>
+                        <li>賢明な人々からは信頼を置かれづらく、表面的な関係と見抜かれやすい</li>
+                        <li>対立や摩擦を極端に避け、表面的な平和を優先する</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>敵にも味方にもなりにくい中立的な存在として捉える</li>
+                        <li>短期的な利益優先のため、明確なインセンティブを示す</li>
+                        <li>関係は一時的・機能的なものと割り切り、深い信頼や長期的忠誠は期待しない</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 典型的営業マン -->
+            <div class="type-card harmless">
+                <h2 class="type-name">典型的営業マン</h2>
+                <div class="type-summary">機能的な協力者 - 適度な距離感を維持</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>社交的で明るく、初対面でも親しみやすい雰囲気を作り出せる</li>
+                        <li>幅広い層から好感を持たれ、敵を作りにくい協調性と柔軟性がある</li>
+                        <li>八方美人より誠実で真面目な印象があり、一定の評価を得られる</li>
+                        <li>相手の気持ちや状況を読む能力に長け、適切な距離感を保つことができる</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>一定の好感度と明確なインセンティブに依存して動くNPC的存在</li>
+                        <li>社交能力や人脈を活用する際は、具体的な見返りと目標を示す</li>
+                        <li>仲間と認められれば十分、それ以上の深い関係は不要</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 風紀委員 -->
+            <div class="type-card caution">
+                <h2 class="type-name">風紀委員</h2>
+                <div class="type-summary">中間管理職材料 - 要カリスマ的支配</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>道徳や常識といった社会通念に忠実で、ルールや秩序を重んじる</li>
+                        <li>特定の集団や組織内で高い信頼と指導力を発揮し、中間管理職的役割を担う</li>
+                        <li>柔軟性に欠け、異なる価値観や新しい考え方を受け入れるのが苦手</li>
+                        <li>権威や上位者に従順で、組織や集団への帰属意識が非常に強い</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>カリスマ性を持って崇拝対象になれば強力な中間管理職として活用可能</li>
+                        <li>カリスマ性がなければ深く関わらないのが賢明</li>
+                        <li>急激な変化や革新的アイデアは段階的に導入し、適応時間を与える</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- パンピ -->
+            <div class="type-card caution">
+                <h2 class="type-name">パンピ</h2>
+                <div class="type-summary">数の資源 - 距離を保ち操作対象として扱う</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>意思が弱く深い思考力に欠ける受動的な存在で、流行や大勢に流されやすい</li>
+                        <li>表面的なプライドだけは高く、自己評価と実力の乖離が大きい傾向がある</li>
+                        <li>感情的な判断が多く、論理的思考や長期的視野が欠如している</li>
+                        <li>集団心理に強く影響され、同調圧力や希少性、限定性、損失回避に弱い</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>基本的な心理学で容易にコントロール可能な人的資源</li>
+                        <li>近づきすぎると嫉妬や憎悪の対象になるため、適切な距離を保つ</li>
+                        <li>表面的なプライドを傷つけないよう配慮しつつ、マニュアル通りに操作</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 狂信者 -->
+            <div class="type-card caution">
+                <h2 class="type-name">狂信者</h2>
+                <div class="type-summary">敵に回すな - 同調姿勢で中立維持</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>特定の思想や人物、文化に強く影響を受け、それに絶対的な忠誠を示す</li>
+                        <li>思想や信念は強いが、独自の魅力や創造性に欠け、模倣的な傾向が強い</li>
+                        <li>批判的思考に欠け、自分の信じるものに対する否定や疑問を受け入れられない</li>
+                        <li>極端な二項対立的思考で、「味方か敵か」という区分けで世界を捉える</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>価値観や信念を表面上は尊重し、直接的な批判や否定は避ける</li>
+                        <li>同じ価値観を共有してるフリをして、プライドを傷つけないよう配慮</li>
+                        <li>敵に回すと執拗に攻撃してくるため、中立的立場を維持する</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 犯罪者 -->
+            <div class="type-card caution">
+                <h2 class="type-name">犯罪者</h2>
+                <div class="type-summary">リスク承知で活用 - 実務的関係のみ</div>
+                <div class="type-features">
+                    <div class="section-title">特徴</div>
+                    <ul>
+                        <li>社会的・道徳的な抑制が弱く、通常の境界線や制約を超えた行動をとる</li>
+                        <li>独自の価値観や生存戦略を持ち、社会の枠組みに依存しない自立性がある</li>
+                        <li>危険と隣り合わせの生き方をしているため、生存本能と危機察知能力が鋭い</li>
+                        <li>短期的利益を優先し、長期的な関係や信頼の構築に価値を見出さないことが多い</li>
+                    </ul>
+                </div>
+                <div class="type-handling">
+                    <div class="section-title">扱い方</div>
+                    <ul>
+                        <li>能力や独自性を認め尊重する姿勢を示す</li>
+                        <li>明確かつ具体的な報酬や利益を提示し、互いに有益な取引関係を構築</li>
+                        <li>力を味方につければ強力な武器になるが、常にリスク管理を怠らない</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <table>
-        <tr>
-            <th style="width: 65%;">科 目</th>
-            <th style="width: 35%;">金 額</th>
-        </tr>
-        <!-- 売上高 -->
-        <tr>
-            <td class="category">【売上高】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory">売　　上　　高</td>
-            <td class="amount">340,782,593</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">売　上　高　　計</td>
-            <td class="amount total">340,782,593</td>
-        </tr>
-        
-        <!-- 売上原価 -->
-        <tr>
-            <td class="category">【売上原価】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory">当　期　商　品　仕　入</td>
-            <td class="amount">27,262,607</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">売　上　原　価　　計</td>
-            <td class="amount total">27,262,607</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">売　上　総　利　益</td>
-            <td class="amount total">313,519,986</td>
-        </tr>
-        
-        <!-- 販売管理費 -->
-        <tr>
-            <td class="category">【販売管理費】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory total">販 売 管 理 費　　計</td>
-            <td class="amount total">23,854,782</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">営　　業　　利　　益</td>
-            <td class="amount total">289,665,204</td>
-        </tr>
-        
-        <!-- 営業外収益 -->
-        <tr>
-            <td class="category">【営業外収益】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory">受　　取　　利　　息</td>
-            <td class="amount">119,873,425</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">営 業 外 収 益　　計</td>
-            <td class="amount total">119,873,425</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">経　　常　　利　　益</td>
-            <td class="amount total">409,538,629</td>
-        </tr>
-        
-        <!-- 特別損失 -->
-        <tr>
-            <td class="category">【特別損失】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory">固 定 資 産 売 却 損 益</td>
-            <td class="amount">3,654,321</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">特　別　損　失　　計</td>
-            <td class="amount total">3,654,321</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">税 引 前 当 期 純 利 益</td>
-            <td class="amount total">405,884,308</td>
-        </tr>
-        
-        <!-- 法人税等 -->
-        <tr>
-            <td class="category">【法人税等】</td>
-            <td class="amount"></td>
-        </tr>
-        <tr>
-            <td class="subcategory">法人税・住民税及び事業税</td>
-            <td class="amount">121,765,292</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">法　人　税　等　　計</td>
-            <td class="amount total">121,765,292</td>
-        </tr>
-        <tr>
-            <td class="subcategory total">当　期　純　利　益</td>
-            <td class="amount total">284,119,016</td>
-        </tr>
-    </table>
+    <footer>
+        <p>© 対人マニュアル - 効率的な人間関係構築のための戦略ガイド</p>
+    </footer>
+    
+    <script>
+        // タイプカードをクリックしたときのエフェクト
+        document.querySelectorAll('.type-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
